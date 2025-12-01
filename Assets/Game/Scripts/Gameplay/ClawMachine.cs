@@ -17,57 +17,25 @@ public class ClawMachine : MonoBehaviour
     [SerializeField] float moveSpeed;
     Vector3 moveDirection;
 
-    void Start()
+    StageManager stageManager;
+    FloatingJoystick joystick;
+
+    public void Init(StageManager inStageManager)
     {
+        stageManager = inStageManager;
+        joystick = stageManager.joystick;
+
         Vector3 startPos = new Vector3(minPos.x, rootClawBase.position.y, minPos.z);
         SetPos(startPos);
     }
 
-    void Update()
+    public void DoUpdate()
     {
         float dt = Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            moveDirection += Vector3.forward;
-        }
-
-        if (Input.GetKeyUp(KeyCode.W))
-        {
-            moveDirection -= Vector3.forward;
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            moveDirection -= Vector3.forward;
-        }
-
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            moveDirection += Vector3.forward;
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            moveDirection -= Vector3.right;
-        }
-
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            moveDirection += Vector3.right;
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            moveDirection += Vector3.right;
-        }
-
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            moveDirection -= Vector3.right;
-        }
-
         Vector3 pos = rootClawBase.position;
+
+        moveDirection = new Vector3(joystick.Direction.x, 0, joystick.Direction.y);
 
         pos += moveDirection * moveSpeed * dt;
 
