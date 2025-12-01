@@ -3,7 +3,17 @@ guid: 171c5a130c96c3d47b29d8ef77cc5862
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass_mat
+    second: {fileID: 2100000, guid: e0039d566eb160444933a638df2fec13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wawajiA_mat
+    second: {fileID: 2100000, guid: 2845caa9c58af514c9030be1b22895b4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
