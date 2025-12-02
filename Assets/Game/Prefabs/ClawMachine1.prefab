@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 2378654782858645959}
   - component: {fileID: 7698406930850192875}
   m_Layer: 0
-  m_Name: ClawMachine
+  m_Name: ClawMachine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,16 +8,15 @@ public class ClawMachine : MonoBehaviour
     [SerializeField] Transform rootZBar;
     [SerializeField] Transform rootClawBase;
     [SerializeField] Transform rootClawArm;
-    [SerializeField] Transform rootFingerParent;
     [SerializeField] Transform[] rootClawFingers;
+    [SerializeField] Transform rootMin;
+    [SerializeField] Transform rootMax;
 
     public ClawMachineGrabArea grabArea;
     public Transform rootGrabbedPrize;
     Prize grabbedPrize;
 
     [Header("Config")]
-    [SerializeField] Vector3 minPos;
-    [SerializeField] Vector3 maxPos;
     [SerializeField] float moveSpeed;
     [SerializeField] float yMoveSpeed;
     Vector3 moveDirection;
@@ -36,9 +35,9 @@ public class ClawMachine : MonoBehaviour
         grabArea.Init(this);
         joystick = stageManager.joystick;
 
-        clawOpenAngle = new Vector3(-45, 0, 0);
+        clawOpenAngle = new Vector3(0, -45, 0);
 
-        Vector3 startPos = new Vector3(minPos.x, rootClawBase.position.y, minPos.z);
+        Vector3 startPos = rootMin.localPosition;
         SetPos(startPos);
     }
 
@@ -57,12 +56,17 @@ public class ClawMachine : MonoBehaviour
 
                 pos += moveDirection * moveSpeed * dt;
 
-                pos.x = Mathf.Clamp(pos.x, minPos.x, maxPos.x);
-                pos.z = Mathf.Clamp(pos.z, minPos.z, maxPos.z);
+                float minX = rootMin.localPosition.x;
+                float minZ = rootMin.localPosition.z;
+                float maxX = rootMax.localPosition.x;
+                float maxZ = rootMax.localPosition.z;
+
+                pos.x = Mathf.Clamp(pos.x, minX, maxX);
+                pos.z = Mathf.Clamp(pos.z, minZ, maxZ);
 
                 SetPos(pos);
             }
-            
+
             if (Input.GetKeyDown(KeyCode.Z)) OpenClaw();
             if (Input.GetKeyDown(KeyCode.X)) CloseClaw();
         }
@@ -91,7 +95,7 @@ public class ClawMachine : MonoBehaviour
         //Grab-CloseClaw
         //Up
         //Return to origin pos
-        
+
         OpenClaw();
         yield return new WaitForSeconds(0.3f);
 
@@ -101,9 +105,9 @@ public class ClawMachine : MonoBehaviour
         {
             float dt = Time.deltaTime;
             rootClawArm.localPosition += -transform.up * yMoveSpeed * dt;
-            
+
             float yArm = rootClawArm.localPosition.y;
-            bool reachGround = yArm <= -0.9f;
+            bool reachGround = yArm <= -0.83f; //TODO config / use gameobject transform instead
             bool hasPrize = grabbedPrize != null;
 
             bool valid = reachGround || hasPrize;
@@ -128,12 +132,15 @@ public class ClawMachine : MonoBehaviour
 
         rootClawArm.localPosition = Vector3.zero;
 
-        float distance = Vector3.Distance(minPos, rootClawBase.localPosition);
+        float distance = Vector3.Distance(rootMin.localPosition, rootClawBase.localPosition);
         float tweenDuration = (distance / moveSpeed) / 2f;
 
-        Vector3 clawBaseFinalPos = new Vector3(minPos.x, rootClawBase.localPosition.y, minPos.z);
-        Vector3 xBarFinalPos = new Vector3(minPos.x, rootXBar.localPosition.y, rootXBar.localPosition.z);
-        Vector3 zBarFinalPos = new Vector3(rootZBar.localPosition.x, rootZBar.localPosition.y, minPos.z);
+        float minX = rootMin.localPosition.x;
+        float minZ = rootMin.localPosition.z;
+
+        Vector3 clawBaseFinalPos = rootMin.localPosition;
+        Vector3 xBarFinalPos = new Vector3(minX, rootXBar.localPosition.y, rootXBar.localPosition.z);
+        Vector3 zBarFinalPos = new Vector3(rootZBar.localPosition.x, rootZBar.localPosition.y, minZ);
 
         Sequence seq = DOTween.Sequence();
 
@@ -147,14 +154,14 @@ public class ClawMachine : MonoBehaviour
 
         yield return new WaitForSeconds(tweenDuration);
 
-        if(grabbedPrize != null)
+        if (grabbedPrize != null)
         {
             DropPrize();
             yield return new WaitForSeconds(0.5f);
 
             CloseClaw();
         }
-        
+
         isGrabSequence = false;
     }
 
