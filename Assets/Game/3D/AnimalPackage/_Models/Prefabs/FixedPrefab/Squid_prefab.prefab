@@ -633,7 +633,7 @@ GameObject:
   - component: {fileID: 5225438595854007203}
   m_Layer: 0
   m_Name: Squid
-  m_TagString: Prize
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
