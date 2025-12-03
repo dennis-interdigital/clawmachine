@@ -14,23 +14,17 @@ public enum PrizeRarity
     Legend
 }
 
-[Serializable]
-public class PrizeData
-{
-    public string id;
-    public string name;
-    public PrizeRarity rarity;
-}
-
 public class Prize : MonoBehaviour
 {
     public Rigidbody rb;
     public Collider col;
+    PrizeData prizeData;
 
     PrizeFactory factory;
-    public void Init(PrizeFactory inPrizeFactory)
+    public void Init(PrizeFactory inPrizeFactory, PrizeData inData)
     {
         factory = inPrizeFactory;
+        prizeData = inData;
     }
 
     public void SetPhysics(bool enable)
@@ -50,6 +44,9 @@ public class Prize : MonoBehaviour
         if (isPrizeDrop)
         {
             DelayDestroy();
+
+            string id = prizeData.id;
+            factory.stageManager.SaveRecord(id, true);
         }
     }
 

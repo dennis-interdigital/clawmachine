@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class PrizeFactory : MonoBehaviour
 {
+    public PrizeSO prizeSO;
     public Prize[] prefabPrizes;
 
     public List<Prize> activePrizeList;
 
     public int editorSpawnAmount;
 
-    StageManager stageManager;
+    [HideInInspector] public StageManager stageManager;
 
     public void Init(StageManager inStageManager)
     {
         stageManager = inStageManager;
-        int count = activePrizeList.Count;
-        for (int i = 0; i < count; i++)
-        {
-            activePrizeList[i].Init(this);
-        }
 
         SpawnPrize(10);
     }
@@ -35,9 +31,10 @@ public class PrizeFactory : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             rndIndex = Random.Range(0, prefabPrizes.Length);
+            PrizeData data = prizeSO.prizeDatas[rndIndex];
             Prize prefab = prefabPrizes[rndIndex];
             Prize prize = Instantiate(prefab, transform);
-            prize.Init(this);
+            prize.Init(this, data);
             yield return new WaitForSeconds(0.2f);
         }
     }
