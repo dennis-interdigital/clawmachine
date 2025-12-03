@@ -100,8 +100,9 @@ public class ClawMachine : MonoBehaviour
         OpenClaw();
         yield return new WaitForSeconds(0.3f);
 
-        bool shouldContinue = false;
+        grabArea.SetColliderEnable(true);
 
+        bool shouldContinue = false;
         while (!shouldContinue)
         {
             float dt = Time.deltaTime;
@@ -139,7 +140,7 @@ public class ClawMachine : MonoBehaviour
         float minX = rootMin.localPosition.x;
         float minZ = rootMin.localPosition.z;
 
-        Vector3 clawBaseFinalPos = rootMin.localPosition;
+        Vector3 clawBaseFinalPos = rootStartPos.localPosition;
         Vector3 xBarFinalPos = new Vector3(minX, rootXBar.localPosition.y, rootXBar.localPosition.z);
         Vector3 zBarFinalPos = new Vector3(rootZBar.localPosition.x, rootZBar.localPosition.y, minZ);
 
@@ -163,6 +164,7 @@ public class ClawMachine : MonoBehaviour
             CloseClaw();
         }
 
+        grabArea.SetColliderEnable(false);
         isGrabSequence = false;
     }
 

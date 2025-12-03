@@ -36,6 +36,9 @@ public class Prize : MonoBehaviour
     {
         rb.useGravity = enable;
         col.enabled = enable;
+
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
     void OnTriggerEnter(Collider other)

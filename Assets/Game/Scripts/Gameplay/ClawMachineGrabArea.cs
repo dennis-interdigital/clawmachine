@@ -8,12 +8,12 @@ public class ClawMachineGrabArea : MonoBehaviour
     public void Init(ClawMachine inClawMachine)
     {
         clawMachine = inClawMachine;
-        Reset();
+        SetColliderEnable(false);
     }
 
-    public void Reset()
+    public void SetColliderEnable(bool enable)
     {
-        col.enabled = true;
+        col.enabled = enable;
     }
 
     void OnTriggerEnter(Collider other)
@@ -24,7 +24,7 @@ public class ClawMachineGrabArea : MonoBehaviour
         if (isPrize)
         {
             clawMachine.GrabPrize(other.gameObject);
-            col.enabled = false;
+            SetColliderEnable(false);
         }
     }
 }
