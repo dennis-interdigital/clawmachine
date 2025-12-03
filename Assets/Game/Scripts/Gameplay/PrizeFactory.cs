@@ -8,6 +8,8 @@ public class PrizeFactory : MonoBehaviour
 
     public List<Prize> activePrizeList;
 
+    public int editorSpawnAmount;
+
     StageManager stageManager;
 
     public void Init(StageManager inStageManager)
