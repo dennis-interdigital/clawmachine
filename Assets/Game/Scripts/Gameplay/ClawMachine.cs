@@ -11,6 +11,7 @@ public class ClawMachine : MonoBehaviour
     [SerializeField] Transform[] rootClawFingers;
     [SerializeField] Transform rootMin;
     [SerializeField] Transform rootMax;
+    [SerializeField] Transform rootStartPos;
 
     public ClawMachineGrabArea grabArea;
     public Transform rootGrabbedPrize;
@@ -37,7 +38,7 @@ public class ClawMachine : MonoBehaviour
 
         clawOpenAngle = new Vector3(0, -45, 0);
 
-        Vector3 startPos = rootMin.localPosition;
+        Vector3 startPos = rootStartPos.localPosition;
         SetPos(startPos);
     }
 
