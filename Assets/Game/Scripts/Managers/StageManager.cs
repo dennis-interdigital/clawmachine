@@ -71,5 +71,7 @@ public class StageManager : MonoBehaviour
         string logString = $"ClawMachine Result: {resultLog}\n" +
             $"Id: {prizeId}\n" +
             $"Time: {dateTimeNow}";
+
+        Debug.Log(logString);
     }
 }

@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8977250637305146675}
-  col: {fileID: 6525020142141021866}
+  col: {fileID: 3915087869761995019}
 --- !u!136 &3915087869761995019
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -663,7 +663,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -771,7 +771,6 @@ GameObject:
   - component: {fileID: 5559529108559052996}
   - component: {fileID: 4479804519201250328}
   - component: {fileID: 3878121610538956294}
-  - component: {fileID: 6525020142141021866}
   m_Layer: 0
   m_Name: Sparrow
   m_TagString: Untagged
@@ -851,29 +850,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!136 &6525020142141021866
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8323668125301682300}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.26
-  m_Height: 0.66957575
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.33830807, z: 0}
 --- !u!1 &8796587105780240501
 GameObject:
   m_ObjectHideFlags: 0
