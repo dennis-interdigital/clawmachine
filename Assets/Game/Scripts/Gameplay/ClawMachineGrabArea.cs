@@ -20,7 +20,7 @@ public class ClawMachineGrabArea : MonoBehaviour
     {
         string tag = other.tag;
 
-        bool isPrize = tag.Equals(Parameter.TAG.PRIZE);
+        bool isPrize = tag.Equals(Parameter.Tag.PRIZE);
         if (isPrize)
         {
             clawMachine.GrabPrize(other.gameObject);
