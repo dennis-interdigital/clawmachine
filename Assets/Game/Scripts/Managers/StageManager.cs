@@ -3,14 +3,18 @@ using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
 {
+    GameManager gameManager;
+
     public FloatingJoystick joystick;
     [SerializeField] ClawMachine clawMachine;
     public PrizeFactory prizeFactory;
 
     [SerializeField] Button buttonGrab;
 
-    void Start()
+    public void Init(GameManager inGameManager)
     {
+        gameManager = inGameManager;
+
         RectTransform rtJoystick = joystick.GetComponent<RectTransform>();
         rtJoystick.sizeDelta = new Vector2(Screen.width / 2, Screen.height / 2);
 
@@ -20,7 +24,7 @@ public class StageManager : MonoBehaviour
         buttonGrab.onClick.AddListener(clawMachine.OnClickGrab);
     }
 
-    void Update()
+    public void DoUpdate()
     {
         clawMachine.DoUpdate();
     }

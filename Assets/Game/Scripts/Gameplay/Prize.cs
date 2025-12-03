@@ -46,7 +46,7 @@ public class Prize : MonoBehaviour
     {
         string tag = other.tag;
 
-        bool isPrizeDrop = tag.Equals(Parameter.TAG.PRIZE_DROP);
+        bool isPrizeDrop = tag.Equals(Parameter.Tag.PRIZE_DROP);
         if (isPrizeDrop)
         {
             DelayDestroy();
