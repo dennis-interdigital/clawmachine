@@ -294,5 +294,10 @@ namespace GogoGaga.OptimizedRopesAndCables
             if (meshFilter != null)
                 Destroy(meshFilter);
         }
+
+        public Rope GetRopeScript()
+        {
+            return rope; 
+        }
     }
 }
