@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,7 +49,15 @@ public class Prize : MonoBehaviour
         bool isPrizeDrop = tag.Equals(Parameter.TAG.PRIZE_DROP);
         if (isPrizeDrop)
         {
-            factory.ReturnPrize(this);
+            DelayDestroy();
         }
+    }
+
+    void DelayDestroy()
+    {
+        DOVirtual.DelayedCall(3f, () =>
+        {
+            factory.ReturnPrize(this);
+        });
     }
 }

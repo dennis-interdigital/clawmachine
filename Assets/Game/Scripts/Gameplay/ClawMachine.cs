@@ -15,6 +15,7 @@ public class ClawMachine : MonoBehaviour
 
     public ClawMachineGrabArea grabArea;
     public Transform rootGrabbedPrize;
+    
     Prize grabbedPrize;
 
     [Header("Config")]
