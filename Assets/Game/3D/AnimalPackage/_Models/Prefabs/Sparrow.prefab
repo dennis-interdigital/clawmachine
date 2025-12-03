@@ -455,7 +455,7 @@ GameObject:
   - component: {fileID: 1275204435932755726}
   m_Layer: 0
   m_Name: Sparrow
-  m_TagString: Untagged
+  m_TagString: Prize
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3510685859085690324}
   m_Layer: 0
   m_Name: Herring
-  m_TagString: Untagged
+  m_TagString: Prize
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
