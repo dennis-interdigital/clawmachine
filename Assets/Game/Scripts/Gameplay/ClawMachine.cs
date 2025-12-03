@@ -1,4 +1,5 @@
 using DG.Tweening;
+using GogoGaga.OptimizedRopesAndCables;
 using System.Collections;
 using UnityEngine;
 
@@ -12,22 +13,25 @@ public class ClawMachine : MonoBehaviour
     [SerializeField] Transform rootMin;
     [SerializeField] Transform rootMax;
     [SerializeField] Transform rootStartPos;
+    [SerializeField] RopeMesh ropeMesh;
 
     public ClawMachineGrabArea grabArea;
     public Transform rootGrabbedPrize;
-    
+
     Prize grabbedPrize;
 
     [Header("Config")]
     [SerializeField] float moveSpeed;
     [SerializeField] float yMoveSpeed;
+    [SerializeField] float ropeMinLength = 4f;
+    [SerializeField] float ropeMaxLength = 8.5f;
+
     Vector3 moveDirection;
 
     StageManager stageManager;
     FloatingJoystick joystick;
 
     Vector3 clawOpenAngle;
-
 
     bool isGrabSequence;
 
@@ -37,10 +41,12 @@ public class ClawMachine : MonoBehaviour
         grabArea.Init(this);
         joystick = stageManager.joystick;
 
-        clawOpenAngle = new Vector3(0, -45, 0);
+        clawOpenAngle = new Vector3(0, -20, 0);
 
         Vector3 startPos = rootStartPos.localPosition;
         SetPos(startPos);
+
+        ropeMesh.GetRopeScript().ropeLength = ropeMinLength;
     }
 
     public void DoUpdate()
@@ -54,8 +60,6 @@ public class ClawMachine : MonoBehaviour
                 float dt = Time.deltaTime;
 
                 Vector3 pos = rootClawBase.localPosition;
-
-
                 pos += moveDirection * moveSpeed * dt;
 
                 float minX = rootMin.localPosition.x;
@@ -92,12 +96,6 @@ public class ClawMachine : MonoBehaviour
 
     IEnumerator GrabSequence()
     {
-        //OpenClaw
-        //Down
-        //Grab-CloseClaw
-        //Up
-        //Return to origin pos
-
         OpenClaw();
         yield return new WaitForSeconds(0.3f);
 
@@ -107,14 +105,15 @@ public class ClawMachine : MonoBehaviour
         while (!shouldContinue)
         {
             float dt = Time.deltaTime;
-            rootClawArm.localPosition += -transform.up * yMoveSpeed * dt;
+            var rope = ropeMesh.GetRopeScript();
 
-            float yArm = rootClawArm.localPosition.y;
-            bool reachGround = yArm <= -0.83f; //TODO config / use gameobject transform instead
+            rope.ropeLength += yMoveSpeed * dt;
+            rope.ropeLength = Mathf.Min(rope.ropeLength, ropeMaxLength);
+
+            bool reachBottom = rope.ropeLength >= ropeMaxLength;
             bool hasPrize = grabbedPrize != null;
 
-            bool valid = reachGround || hasPrize;
-            shouldContinue = valid;
+            shouldContinue = reachBottom || hasPrize;
             yield return null;
         }
 
@@ -125,18 +124,20 @@ public class ClawMachine : MonoBehaviour
         while (!shouldContinue)
         {
             float dt = Time.deltaTime;
-            rootClawArm.localPosition += transform.up * yMoveSpeed * dt;
+            var rope = ropeMesh.GetRopeScript();
 
-            float yArm = rootClawArm.localPosition.y;
-            bool reachTop = yArm >= 0f;
+            rope.ropeLength -= yMoveSpeed * dt;
+            rope.ropeLength = Mathf.Max(rope.ropeLength, ropeMinLength);
+
+            bool reachTop = rope.ropeLength <= ropeMinLength;
             shouldContinue = reachTop;
             yield return null;
         }
 
-        rootClawArm.localPosition = Vector3.zero;
+        ropeMesh.GetRopeScript().ropeLength = ropeMinLength;
 
         float distance = Vector3.Distance(rootMin.localPosition, rootClawBase.localPosition);
-        float tweenDuration = (distance / moveSpeed) / 2f;
+        float tweenDuration = (distance / moveSpeed);
 
         float minX = rootMin.localPosition.x;
         float minZ = rootMin.localPosition.z;
@@ -161,8 +162,7 @@ public class ClawMachine : MonoBehaviour
         {
             DropPrize();
             yield return new WaitForSeconds(0.5f);
-
-            CloseClaw();
+            ResetClawRotation();
         }
 
         grabArea.SetColliderEnable(false);
@@ -173,12 +173,14 @@ public class ClawMachine : MonoBehaviour
     {
         grabbedPrize = prize.GetComponent<Prize>();
         grabbedPrize.transform.parent = rootGrabbedPrize;
+        var rootPos = rootGrabbedPrize.localPosition;
+        Vector3 newPos = new Vector3(rootPos.x, grabbedPrize.transform.localPosition.y, rootPos.z);
+        grabbedPrize.transform.DOLocalMove(Vector3.zero, 0.5f);
         grabbedPrize.SetPhysics(false);
     }
 
     public void DropPrize()
     {
-        //do drop here
         OpenClaw();
         grabbedPrize.transform.parent = stageManager.prizeFactory.transform;
         grabbedPrize.SetPhysics(true);
@@ -189,15 +191,24 @@ public class ClawMachine : MonoBehaviour
     {
         foreach (Transform t in rootClawFingers)
         {
-            t.DOLocalRotate(clawOpenAngle, 0.5f).SetEase(Ease.Linear);
+            t.DOLocalRotate(clawOpenAngle, 0.2f).SetEase(Ease.Linear);
         }
     }
 
     void CloseClaw()
     {
+        Vector3 newRot = new Vector3(0, 10, 0);
         foreach (Transform t in rootClawFingers)
         {
-            t.DOLocalRotate(Vector3.zero, 0.5f).SetEase(Ease.Linear);
+            t.DOLocalRotate(newRot, 0.2f).SetEase(Ease.Linear);
+        }
+    }
+
+    void ResetClawRotation()
+    {
+        foreach (Transform t in rootClawFingers)
+        {
+            t.DOLocalRotate(Vector3.zero, 0.2f);
         }
     }
 }
