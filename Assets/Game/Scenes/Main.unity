@@ -1033,13 +1033,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabPrizes:
-  - {fileID: -4891408372462286969, guid: 84b7c8441f160174fa5c6f94cf397f0a, type: 3}
-  - {fileID: 3045664605215364849, guid: cefda5744f2acb54d8f08973a10bee1e, type: 3}
-  - {fileID: -3772095293454865085, guid: 4aa01f1d5c72d4e47a8c44e612a6b6fc, type: 3}
-  - {fileID: 4718075456955685178, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
-  - {fileID: 164262770973312710, guid: 252ba5fa5d8167e42af72cf97baa830e, type: 3}
-  - {fileID: 6283349719205247103, guid: ad4137f595ec8e2449cacca9df7d3735, type: 3}
-  - {fileID: 7169606460820079995, guid: 818c5a1ba0d9810439f11299463f2294, type: 3}
+  - {fileID: -7704758841192447206, guid: 7cca776cd819a4e41a36b2ac89ea6a38, type: 3}
+  - {fileID: -6840069272040226838, guid: 6a2dcabd0288cca4383fea53e34a3e0f, type: 3}
+  - {fileID: 5731827679270344534, guid: 1a910002360146d4cb75b9fcf1a1ad8b, type: 3}
+  - {fileID: -2779710579007179459, guid: 32e1fac1bed3bfe42b817dc67a3b169a, type: 3}
+  - {fileID: 4856603026920161289, guid: f8eddd07e0c36084dbeed8619f8b7389, type: 3}
+  - {fileID: -2597618966390807561, guid: a324a72d76bc2824da2f972d518dab53, type: 3}
+  - {fileID: 9095641873271457573, guid: 14af3da76523a2a46b7f4ff4ed97cf95, type: 3}
   activePrizeList: []
 --- !u!114 &1298257632 stripped
 MonoBehaviour:

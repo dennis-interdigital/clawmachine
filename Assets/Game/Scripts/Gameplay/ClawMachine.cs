@@ -37,7 +37,7 @@ public class ClawMachine : MonoBehaviour
         grabArea.Init(this);
         joystick = stageManager.joystick;
 
-        clawOpenAngle = new Vector3(0, -45, 0);
+        clawOpenAngle = new Vector3(0, -20, 0);
 
         Vector3 startPos = rootStartPos.localPosition;
         SetPos(startPos);
@@ -161,8 +161,7 @@ public class ClawMachine : MonoBehaviour
         {
             DropPrize();
             yield return new WaitForSeconds(0.5f);
-
-            CloseClaw();
+            ResetClawRotation();
         }
 
         grabArea.SetColliderEnable(false);
@@ -173,6 +172,9 @@ public class ClawMachine : MonoBehaviour
     {
         grabbedPrize = prize.GetComponent<Prize>();
         grabbedPrize.transform.parent = rootGrabbedPrize;
+        var rootPos = rootGrabbedPrize.localPosition;
+        Vector3 newPos = new Vector3(rootPos.x, grabbedPrize.transform.localPosition.y, rootPos.z);
+        grabbedPrize.transform.DOLocalMove(newPos, 0.5f);
         grabbedPrize.SetPhysics(false);
     }
 
@@ -189,15 +191,25 @@ public class ClawMachine : MonoBehaviour
     {
         foreach (Transform t in rootClawFingers)
         {
-            t.DOLocalRotate(clawOpenAngle, 0.5f).SetEase(Ease.Linear);
+            t.DOLocalRotate(clawOpenAngle, 0.2f).SetEase(Ease.Linear);
         }
     }
 
     void CloseClaw()
     {
+        Vector3 newRot = new Vector3(0, 10, 0);
         foreach (Transform t in rootClawFingers)
         {
-            t.DOLocalRotate(Vector3.zero, 0.5f).SetEase(Ease.Linear);
+            //t.DOLocalRotate(Vector3.zero, 0.2f).SetEase(Ease.Linear);
+            t.DOLocalRotate(newRot, 0.2f).SetEase(Ease.Linear);
+        }
+    }
+
+    void ResetClawRotation()
+    {
+        foreach (Transform t in rootClawFingers)
+        {
+            t.DOLocalRotate(Vector3.zero, 0.2f);
         }
     }
 }
