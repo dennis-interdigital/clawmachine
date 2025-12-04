@@ -25,6 +25,9 @@ public class StageManager : MonoBehaviour
     public ClawMachine clawMachine;
     public PrizeFactory prizeFactory;
 
+    public GameObject objWallresult;
+    public GameObject[] objPrizeResults;
+
     public void Init(GameManager inGameManager)
     {
         gameManager = inGameManager;
@@ -116,5 +119,19 @@ public class StageManager : MonoBehaviour
         clawMachine.StartGrabSequence(success);
 
         Debug.Log($"START GRAB SEUQNCE: {success}");
+    }
+
+    public void SetPrizeResult(bool active, int index = 0)
+    {
+        foreach (GameObject obj in objPrizeResults)
+        {
+            obj.SetActive(false);
+        }
+
+        objWallresult.SetActive(active);
+        if (active)
+        {
+            objPrizeResults[index].SetActive(true);
+        }
     }
 }
