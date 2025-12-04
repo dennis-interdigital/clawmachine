@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PrizeFactory : MonoBehaviour
 {
+    [SerializeField] private int initalSpawnAmount = 10;
+
     public Prize[] prefabPrizes;
 
     public List<Prize> activePrizeList;
@@ -21,7 +23,7 @@ public class PrizeFactory : MonoBehaviour
             activePrizeList[i].Init(this);
         }
 
-        SpawnPrize(10);
+        SpawnPrize(initalSpawnAmount);
     }
 
     public void SpawnPrize(int amount)
