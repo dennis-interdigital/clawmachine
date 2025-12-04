@@ -1881,7 +1881,7 @@ Transform:
   m_GameObject: {fileID: 7220972998761648783}
   serializedVersion: 2
   m_LocalRotation: {x: -0.35355338, y: 0.61237246, z: 0.61237246, w: 0.35355338}
-  m_LocalPosition: {x: 0, y: 0.09945911, z: 0}
+  m_LocalPosition: {x: 0, y: 0.093661696, z: 0}
   m_LocalScale: {x: 0.19581407, y: 0.19954383, z: 0.1595664}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2390,7 +2390,7 @@ MonoBehaviour:
   grabArea: {fileID: 5141678561913943522}
   rootGrabbedPrize: {fileID: 9040077302703613112}
   grabbedPrize: {fileID: 0}
-  moveSpeed: 3
+  moveSpeed: 5
   yMoveSpeed: 4
   ropeMinLength: 1
   ropeMaxLength: 8.5
@@ -2488,15 +2488,15 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 7.8336, z: 0}
-  - {x: 0, y: 7.458744, z: 0}
-  - {x: 0, y: 7.389851, z: 0}
-  - {x: 0, y: 7.3633976, z: 0}
-  - {x: 0, y: 7.351911, z: 0}
-  - {x: 0, y: 7.3485937, z: 0}
-  - {x: 0, y: 7.3519106, z: 0}
-  - {x: 0, y: 7.3633976, z: 0}
-  - {x: 0, y: 7.3898506, z: 0}
-  - {x: 0, y: 7.4587436, z: 0}
+  - {x: 0, y: 7.424444, z: 0}
+  - {x: 0, y: 7.3663726, z: 0}
+  - {x: 0, y: 7.34515, z: 0}
+  - {x: 0, y: 7.336111, z: 0}
+  - {x: 0, y: 7.3335204, z: 0}
+  - {x: 0, y: 7.336111, z: 0}
+  - {x: 0, y: 7.34515, z: 0}
+  - {x: 0, y: 7.3663716, z: 0}
+  - {x: 0, y: 7.4244447, z: 0}
   - {x: 0, y: 7.8336, z: 0}
   m_Parameters:
     serializedVersion: 3
@@ -2582,11 +2582,11 @@ MonoBehaviour:
   midPoint: {fileID: 6171229742867744515}
   endPoint: {fileID: 6452406416241885046}
   linePoints: 10
-  stiffness: 200
-  damping: 10
+  stiffness: 250
+  damping: 5
   ropeLength: 1
   ropeWidth: 0.08
-  midPointWeight: 11.1
+  midPointWeight: 15
   midPointPosition: 0.5
 --- !u!114 &8608401671347828681
 MonoBehaviour:
@@ -2600,7 +2600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5702366e18c47ef469ba2903e5846489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OverallDivision: 6
+  OverallDivision: 25
   ropeWidth: 0.03
   radialDivision: 8
   material: {fileID: 0}
