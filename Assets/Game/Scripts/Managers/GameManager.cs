@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     //monobehaviors
     public StageManager stageManager;
+    public UIManager uiManager;
 
     public UserData userData;
 

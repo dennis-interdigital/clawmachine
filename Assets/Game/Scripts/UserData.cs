@@ -3,6 +3,7 @@ using System.Collections.Generic;
 public class UserData
 {
     public int coin;
+    public int diamond;
 
     public List<bool> probabilityDatas;
     public List<InventoryData> inventoryDatas;
@@ -12,7 +13,8 @@ public class UserData
     {
         if (firstTime)
         {
-            coin = 0;
+            coin = 1000;
+            diamond = 100;
         }
     }
 }

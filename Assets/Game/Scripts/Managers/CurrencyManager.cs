@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class CurrencyManager
 {
     GameManager gameManager;
@@ -29,5 +25,23 @@ public class CurrencyManager
     public void AddCoin(int amount)
     {
         userData.coin += amount;
+    }
+
+    public bool IsDiamondSufficient(int cost)
+    {
+        int diamond = userData.diamond;
+        bool result = diamond >= cost;
+
+        return result;
+    }
+
+    public void SpendDiamond(int amount)
+    {
+        userData.diamond -= amount;
+    }
+
+    public void AddDiamond(int amount)
+    {
+        userData.diamond += amount;
     }
 }
