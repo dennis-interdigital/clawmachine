@@ -52,10 +52,10 @@ public class Prize : MonoBehaviour
         bool isPrizeDrop = tag.Equals(Parameter.Tag.PRIZE_DROP);
         if (isPrizeDrop)
         {
-            DelayDestroy();
-
             string id = prizeData.id;
             factory.stageManager.SaveRecord(id, true);
+            factory.inventoryManager.AddToInventory(id, 1);
+            DelayDestroy();
         }
     }
 

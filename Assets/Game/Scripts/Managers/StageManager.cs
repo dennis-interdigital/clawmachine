@@ -44,7 +44,7 @@ public class StageManager : MonoBehaviour
         RectTransform rtJoystick = joystick.GetComponent<RectTransform>();
         rtJoystick.sizeDelta = new Vector2(Screen.width / 2, Screen.height / 2);
 
-        prizeFactory.Init(this);
+        prizeFactory.Init(gameManager);
         clawMachine.Init(this);
 
         buttonGrab.onClick.AddListener(OnClickGrab);

@@ -208,8 +208,6 @@ public class ClawMachine : MonoBehaviour
     {
         grabbedPrize = prize.GetComponent<Prize>();
         grabbedPrize.transform.parent = rootGrabbedPrize;
-        //var rootPos = rootGrabbedPrize.localPosition;
-        //Vector3 newPos = new Vector3(rootPos.x, grabbedPrize.transform.localPosition.y, rootPos.z);
         grabbedPrize.transform.DOLocalMove(Vector3.zero, 0.5f);
         grabbedPrize.SetPhysics(false);
     }
