@@ -38,11 +38,11 @@ public class StageManager : MonoBehaviour
 
         if (userData.prizeRecordDatas == null)
         {
-            userData.prizeRecordDatas = new System.Collections.Generic.List<PrizeRecordData>();
+            userData.prizeRecordDatas = new List<PrizeRecordData>();
         }
 
         RectTransform rtJoystick = joystick.GetComponent<RectTransform>();
-        rtJoystick.sizeDelta = new Vector2(Screen.width / 2, Screen.height / 2);
+        rtJoystick.sizeDelta = new Vector2(Screen.width, Screen.height / 2);
 
         prizeFactory.Init(gameManager);
         clawMachine.Init(this);
