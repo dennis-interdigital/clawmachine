@@ -2656,7 +2656,6 @@ GameObject:
   - component: {fileID: 899883731823764306}
   - component: {fileID: 5365332503664266215}
   - component: {fileID: 8704328871715723838}
-  - component: {fileID: 7110190815065318928}
   m_Layer: 0
   m_Name: Machine
   m_TagString: Untagged
@@ -2753,27 +2752,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: 1c2f7539fc9443c49b4976a17f292105, type: 3}
---- !u!65 &7110190815065318928
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8269611952809570457}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.040000018, y: 0.05000002, z: 0.030751897}
-  m_Center: {x: 0, y: -0.004999995, z: -0.034624092}
 --- !u!1 &8292050774730749962
 GameObject:
   m_ObjectHideFlags: 0

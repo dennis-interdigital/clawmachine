@@ -14,6 +14,12 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool gameReady;
 
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 120;
+    }
+
     void Start()
     {
         Load();
