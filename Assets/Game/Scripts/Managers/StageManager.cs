@@ -83,8 +83,10 @@ public class StageManager : MonoBehaviour
 
         gameManager.uiManager.ShowPopup(PopupState.Result, status, prizeData, prizeIndex);
 
+        string id = prizeData != null ? prizeData.id : "-";
+
         string logString = $"ClawMachine Result: {resultLog}\n" +
-            $"Id: {prizeData.id}\n" +
+            $"Id: {id}\n" +
             $"Time: {dateTimeNow}";
 
         Debug.Log(logString);

@@ -19,6 +19,5 @@ public class TitleMenuUI : BaseUI
     {
         uiManager.ShowUI(UIState.MainMenu);
         uiManager.overlayMenuUI.SetTopMenu(true);
-        uiManager.overlayMenuUI.SetBottomMenu(true);
     }
 }

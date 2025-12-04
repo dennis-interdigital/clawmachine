@@ -189,15 +189,15 @@ public class ClawMachine : MonoBehaviour
         {
             DropPrize();
             yield return new WaitForSeconds(0.5f);
-            ResetClawRotation();
+
+            grabArea.SetColliderEnable(false);
         }
-
-        grabArea.SetColliderEnable(false);
-
-        if (!success)
+        else
         {
             stageManager.SaveRecord(null, 0, false);
         }
+
+        ResetClawRotation();
 
         isGrabSequence = false;
     }
