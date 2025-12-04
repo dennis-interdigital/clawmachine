@@ -13,7 +13,6 @@ public class MainMenuUI : BaseUI
 
     public override void Show(params object[] payload)
     {
-        uiManager.overlayMenuUI.SetTopMenu(true);
         uiManager.overlayMenuUI.SetBottomMenu(true);
         base.Show(payload);
     }
