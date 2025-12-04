@@ -49,7 +49,7 @@ public class ClawMachine : MonoBehaviour
         ropeMesh.GetRopeScript().ropeLength = ropeMinLength;
     }
 
-    public void DoUpdate()
+    public void DoUpdate(float dt)
     {
         if (!isGrabSequence)
         {
@@ -57,8 +57,6 @@ public class ClawMachine : MonoBehaviour
 
             if (moveDirection != Vector3.zero)
             {
-                float dt = Time.deltaTime;
-
                 Vector3 pos = rootClawBase.localPosition;
                 pos += moveDirection * moveSpeed * dt;
 

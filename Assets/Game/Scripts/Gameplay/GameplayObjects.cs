@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonRotateObject : MonoBehaviour
+public class GameplayObjects : MonoBehaviour
 {
     [Header("Rotation Settings")]
     public float rotateStep = 90f;
@@ -9,28 +9,25 @@ public class ButtonRotateObject : MonoBehaviour
     public float minY = -90f;
     public float maxY = 90f;
 
-    [Header("UI Buttons")]
-    public Button leftButton;
-    public Button rightButton;
+    [HideInInspector] public float targetY;
 
-    private float targetY;
+    StageManager stageManager;
 
-    void Start()
+    public void Init(StageManager inStageManager)
     {
+        stageManager = inStageManager;
+
+        targetY = 0;
+
         targetY = NormalizeAngle(transform.localEulerAngles.y);
         targetY = Mathf.Clamp(targetY, minY, maxY);
-        SetRotationInstant(targetY);
-
-        leftButton.onClick.AddListener(RotateLeft);
-        rightButton.onClick.AddListener(RotateRight);
-
-        UpdateButtonState();
+        SetRotation(targetY);
     }
 
-    void Update()
+    public void DoUpdate(float dt)
     {
         float currentY = NormalizeAngle(transform.localEulerAngles.y);
-        float newY = Mathf.Lerp(currentY, targetY, Time.deltaTime * rotateSpeed);
+        float newY = Mathf.Lerp(currentY, targetY, dt * rotateSpeed);
         transform.localRotation = Quaternion.Euler(0f, newY, 0f);
     }
 
@@ -40,7 +37,6 @@ public class ButtonRotateObject : MonoBehaviour
 
         targetY -= rotateStep;
         targetY = Mathf.Clamp(targetY, minY, maxY);
-        UpdateButtonState();
     }
 
     public void RotateRight()
@@ -49,16 +45,9 @@ public class ButtonRotateObject : MonoBehaviour
 
         targetY += rotateStep;
         targetY = Mathf.Clamp(targetY, minY, maxY);
-        UpdateButtonState();
     }
 
-    void UpdateButtonState()
-    {
-        leftButton.interactable = targetY > minY;
-        rightButton.interactable = targetY < maxY;
-    }
-
-    void SetRotationInstant(float y)
+    void SetRotation(float y)
     {
         transform.localRotation = Quaternion.Euler(0f, y, 0f);
     }

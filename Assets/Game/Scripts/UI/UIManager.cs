@@ -30,7 +30,7 @@ public class UIClass
 public class UIManager : MonoBehaviour
 {
     public Canvas canvas;
-
+    public GameObject objBlackUI;
     public OverlayMenuUI overlayMenuUI;
     public List<UIClass> uiList;
     public List<UIClass> popupList;
@@ -56,6 +56,18 @@ public class UIManager : MonoBehaviour
         for(int i = 0;i < count; i++)
         {
             popupList[i].baseUI.Init(gameManager);
+        }
+    }
+
+    public void DoUpdate(float dt)
+    {
+        int count = uiList.Count;
+        for (int i = 0; i < count; i++)
+        {
+            if (uiList[i].baseUI.gameObject.activeSelf)
+            {
+                uiList[i].baseUI.DoUpdate(dt);
+            }
         }
     }
 

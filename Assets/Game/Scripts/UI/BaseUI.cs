@@ -12,7 +12,15 @@ public class BaseUI : MonoBehaviour
         uiManager = gameManager.uiManager;
     }
 
-    public virtual void Show(){ }
-    public virtual void Hide() { }
+    public virtual void DoUpdate(float dt) { }
+
+    public virtual void Show()
+    {
+        gameObject.SetActive(true);
+    }
+    public virtual void Hide() 
+    {
+        gameObject.SetActive(false);
+    }
 
 }

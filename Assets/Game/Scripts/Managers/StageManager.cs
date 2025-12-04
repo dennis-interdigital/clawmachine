@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,10 +21,9 @@ public class StageManager : MonoBehaviour
     public int successRate;
 
     public FloatingJoystick joystick;
-    [SerializeField] ClawMachine clawMachine;
+    public GameplayObjects gameplayObjects;
+    public ClawMachine clawMachine;
     public PrizeFactory prizeFactory;
-
-    [SerializeField] Button buttonGrab;
 
     public void Init(GameManager inGameManager)
     {
@@ -46,13 +46,12 @@ public class StageManager : MonoBehaviour
 
         prizeFactory.Init(gameManager);
         clawMachine.Init(this);
-
-        buttonGrab.onClick.AddListener(OnClickGrab);
     }
 
-    public void DoUpdate()
+    public void DoUpdate(float dt)
     {
-        clawMachine.DoUpdate();
+        gameplayObjects.DoUpdate(dt);
+        clawMachine.DoUpdate(dt);
     }
 
     public void SaveRecord(string prizeId, bool status)
@@ -104,7 +103,7 @@ public class StageManager : MonoBehaviour
         Debug.Log(log);
     }
 
-    void OnClickGrab()
+    public void OnClickGrab()
     {
         if(userData.probabilityDatas.Count == 0)
         {

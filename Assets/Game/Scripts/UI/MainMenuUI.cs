@@ -1,18 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class MainMenuUI : MonoBehaviour
+public class MainMenuUI : BaseUI
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Button buttonInsertCoin;
+    public override void Init(GameManager inGameManager)
     {
-        
+        base.Init(inGameManager);
+
+        buttonInsertCoin.onClick.AddListener(OnClickInsertCoin);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Show()
     {
-        
+        base.Show();
+    }
+
+    void OnClickInsertCoin()
+    {
+        uiManager.overlayMenuUI.SetBottomMenu(false);
+        uiManager.ShowUI(UIState.GameMenu);
     }
 }

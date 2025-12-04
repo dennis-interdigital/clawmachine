@@ -18,13 +18,14 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = 120;
+        uiManager.objBlackUI.SetActive(true);
     }
 
     void Start()
     {
         Load();
         InitManagers();
-        gameReady = true;
+        
     }
 
     public void Load()
@@ -58,6 +59,13 @@ public class GameManager : MonoBehaviour
         inventoryManager.Init(this);
 
         stageManager.Init(this);
+
+        uiManager.Init(this);
+
+        uiManager.ShowUI(UIState.TitleMenu);
+        uiManager.objBlackUI.SetActive(false);
+
+        gameReady = true;
     }
 
     // Update is called once per frame
@@ -65,7 +73,9 @@ public class GameManager : MonoBehaviour
     {
         if (gameReady)
         {
-            stageManager.DoUpdate();
+            float dt = Time.deltaTime;
+            stageManager.DoUpdate(dt);
+            uiManager.DoUpdate(dt);
         }
     }
 
