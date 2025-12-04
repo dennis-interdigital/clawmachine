@@ -14,11 +14,11 @@ public class BaseUI : MonoBehaviour
 
     public virtual void DoUpdate(float dt) { }
 
-    public virtual void Show()
+    public virtual void Show(params object[] payload)
     {
         gameObject.SetActive(true);
     }
-    public virtual void Hide() 
+    public virtual void Hide(params object[] payload) 
     {
         gameObject.SetActive(false);
     }

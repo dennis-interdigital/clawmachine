@@ -38,6 +38,7 @@ public class PrizeFactory : MonoBehaviour
             Prize prefab = prefabPrizes[rndIndex];
             Prize prize = Instantiate(prefab, transform);
             prize.Init(this, data);
+            prize.index = rndIndex;
 
             activePrizeList.Add(prize);
             yield return new WaitForSeconds(0.2f);

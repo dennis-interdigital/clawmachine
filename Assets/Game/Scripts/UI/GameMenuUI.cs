@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameMenuUI : BaseUI
 {
+    public FloatingJoystick joystick;
     [SerializeField] Button buttonGrab;
     [SerializeField] Button buttonRotateLeft;
     [SerializeField] Button buttonRotateRight;
@@ -22,7 +21,14 @@ public class GameMenuUI : BaseUI
         buttonRotateLeft.onClick.AddListener(OnClickRotateLeft);
         buttonRotateRight.onClick.AddListener(OnClickRotateRight);
 
+    }
+
+    public override void Show(params object[] payload)
+    {
+        SetButtonEnable(true);
         RefreshUI();
+
+        base.Show(payload);
     }
 
     public void RefreshUI()
@@ -31,8 +37,17 @@ public class GameMenuUI : BaseUI
         buttonRotateRight.interactable = gameplayObjects.targetY < gameplayObjects.maxY;
     }
 
+    public void SetButtonEnable(bool enable)
+    {
+        buttonGrab.enabled = enable;
+        buttonRotateLeft.enabled = enable;
+        buttonRotateRight.enabled = enable;
+        joystick.gameObject.SetActive(enable);
+    }
+
     void OnClickGrab()
     {
+        SetButtonEnable(false);
         stageManager.OnClickGrab();
     }
 

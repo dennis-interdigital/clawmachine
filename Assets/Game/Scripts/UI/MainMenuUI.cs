@@ -11,11 +11,6 @@ public class MainMenuUI : BaseUI
         buttonInsertCoin.onClick.AddListener(OnClickInsertCoin);
     }
 
-    public override void Show()
-    {
-        base.Show();
-    }
-
     void OnClickInsertCoin()
     {
         uiManager.overlayMenuUI.SetBottomMenu(false);

@@ -194,9 +194,9 @@ public class ClawMachine : MonoBehaviour
 
         grabArea.SetColliderEnable(false);
 
-        if (!success && grabbedPrize != null)
+        if (!success)
         {
-            stageManager.SaveRecord(prizeId, false);
+            stageManager.SaveRecord(null, 0, false);
         }
 
         isGrabSequence = false;

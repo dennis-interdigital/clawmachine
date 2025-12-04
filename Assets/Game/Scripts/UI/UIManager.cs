@@ -17,7 +17,7 @@ public enum PopupState
 {
     None,
     General,
-    PrizeResult
+    Result
 }
 
 [Serializable]
@@ -27,16 +27,25 @@ public class UIClass
     public BaseUI baseUI;
 }
 
+[Serializable]
+public class PopupClass
+{
+    public PopupState state;
+    public BaseUI baseUI;
+}
 public class UIManager : MonoBehaviour
 {
     public Canvas canvas;
     public GameObject objBlackUI;
     public OverlayMenuUI overlayMenuUI;
     public List<UIClass> uiList;
-    public List<UIClass> popupList;
+    public List<PopupClass> popupList;
     
     public UIState currentUI;
     public PopupState currentPopup;
+
+    public BaseUI currentActiveUI;
+    public BaseUI currentActivePopup;
 
     GameManager gameManager;
 
@@ -86,26 +95,47 @@ public class UIManager : MonoBehaviour
         }
 
         toActive.baseUI.Show();
+        currentActiveUI = toActive.baseUI;
+        currentUI = state;
     }
 
     public void ShowPopup(PopupState state, params object[] payload)
     {
 
+        PopupClass popup = GetPopup(state);
+        if(popup != null)
+        {
+            popup.baseUI.Show(payload);
+            currentActivePopup = popup.baseUI;
+            currentPopup = state;
+        }
+        else
+        {
+            Debug.LogError($"POPUP {state} DOES NOT EXIST!");
+        }
     }
 
     public void HidePopup(PopupState state, params object[] payload)
     {
-
+        currentActivePopup.Hide(payload);
+        currentActivePopup = null;
+        currentPopup = PopupState.None;
     }
 
-    IEnumerator ShowingPopup(PopupState state, params object[] payload)
+    PopupClass GetPopup(PopupState state)
     {
-        yield return null;
-    }
+        PopupClass result = null;
 
-    IEnumerator HidingPopup(PopupState state, params object[] payload)
-    {
-        yield return null;
-    }
+        int count = popupList.Count;
+        for (int i = 0; i < count; i++)
+        {
+            PopupClass popup = popupList[i];
+            if (popup.state.Equals(state))
+            {
+                result = popup;
+            }
+        }
 
+        return result;
+    }
 }

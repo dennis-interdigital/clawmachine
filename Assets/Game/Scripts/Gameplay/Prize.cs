@@ -16,7 +16,7 @@ public class Prize : MonoBehaviour
     public Rigidbody rb;
     public Collider col;
     [HideInInspector] public PrizeData prizeData;
-
+    [HideInInspector] public int index;
     PrizeFactory factory;
     public void Init(PrizeFactory inPrizeFactory, PrizeData inData)
     {
@@ -53,7 +53,7 @@ public class Prize : MonoBehaviour
         if (isPrizeDrop)
         {
             string id = prizeData.id;
-            factory.stageManager.SaveRecord(id, true);
+            factory.stageManager.SaveRecord(prizeData, index, true);
             factory.inventoryManager.AddToInventory(id, 1);
             DelayDestroy();
         }
