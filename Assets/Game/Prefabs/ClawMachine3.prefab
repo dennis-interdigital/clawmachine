@@ -2200,6 +2200,7 @@ MonoBehaviour:
   ropeMesh: {fileID: 8608401671347828681}
   grabArea: {fileID: 5141678561913943522}
   rootGrabbedPrize: {fileID: 9040077302703613112}
+  grabbedPrize: {fileID: 0}
   moveSpeed: 3
   yMoveSpeed: 4
   ropeMinLength: 1
