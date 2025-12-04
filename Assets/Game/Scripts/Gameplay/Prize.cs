@@ -1,7 +1,4 @@
 using DG.Tweening;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum PrizeRarity
@@ -18,7 +15,7 @@ public class Prize : MonoBehaviour
 {
     public Rigidbody rb;
     public Collider col;
-    PrizeData prizeData;
+    [HideInInspector] public PrizeData prizeData;
 
     PrizeFactory factory;
     public void Init(PrizeFactory inPrizeFactory, PrizeData inData)
@@ -32,8 +29,20 @@ public class Prize : MonoBehaviour
         rb.useGravity = enable;
         col.enabled = enable;
 
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        if (enable)
+        {
+            float rndTorqueX = Random.Range(-50f, 50f);
+            float rndTorqueY = Random.Range(-50f, 50f);
+            float rndTorqueZ = Random.Range(-50f, 50f);
+
+            Vector3 rndTorque = new Vector3(rndTorqueX, rndTorqueY, rndTorqueZ);
+            rb.AddRelativeTorque(rndTorque, ForceMode.Acceleration);
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
     }
 
     void OnTriggerEnter(Collider other)

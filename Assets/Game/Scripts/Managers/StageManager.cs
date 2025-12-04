@@ -34,7 +34,7 @@ public class StageManager : MonoBehaviour
         {
             userData.probabilityDatas = new List<bool>();
         }
-
+        GenerateProbabilityDatas();
 
         if (userData.prizeRecordDatas == null)
         {
@@ -86,6 +86,8 @@ public class StageManager : MonoBehaviour
 
     void GenerateProbabilityDatas()
     {
+        string log = string.Empty;
+
         for (int i = 0;i < 100; i++)
         {
             bool success = i < successRate;
@@ -93,6 +95,13 @@ public class StageManager : MonoBehaviour
         }
 
         userData.probabilityDatas.Shuffle();
+
+        int count = userData.probabilityDatas.Count;
+        for (int i = 0; i < count; i++)
+        {
+            log += $"{userData.probabilityDatas[i]},";
+        }
+        Debug.Log(log);
     }
 
     void OnClickGrab()
@@ -106,5 +115,7 @@ public class StageManager : MonoBehaviour
         userData.probabilityDatas.RemoveAt(0);
 
         clawMachine.StartGrabSequence(success);
+
+        Debug.Log($"START GRAB SEUQNCE: {success}");
     }
 }

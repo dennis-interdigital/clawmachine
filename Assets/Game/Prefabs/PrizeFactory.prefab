@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2859877538969650832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2946803148555513708}
+  - component: {fileID: 7577814431148381856}
+  m_Layer: 0
+  m_Name: PrizeFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2946803148555513708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2859877538969650832}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7577814431148381856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2859877538969650832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5d3c9053108fb4d824e0b266ef193f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prizeSO: {fileID: 11400000, guid: 5dc94ffcc52b4b9408fc749d9492b75a, type: 2}
+  prefabPrizes:
+  - {fileID: -7704758841192447206, guid: 7cca776cd819a4e41a36b2ac89ea6a38, type: 3}
+  - {fileID: -6840069272040226838, guid: 6a2dcabd0288cca4383fea53e34a3e0f, type: 3}
+  - {fileID: 5731827679270344534, guid: 1a910002360146d4cb75b9fcf1a1ad8b, type: 3}
+  - {fileID: -2779710579007179459, guid: 32e1fac1bed3bfe42b817dc67a3b169a, type: 3}
+  - {fileID: 4856603026920161289, guid: f8eddd07e0c36084dbeed8619f8b7389, type: 3}
+  - {fileID: -2597618966390807561, guid: a324a72d76bc2824da2f972d518dab53, type: 3}
+  - {fileID: 9095641873271457573, guid: 14af3da76523a2a46b7f4ff4ed97cf95, type: 3}
+  activePrizeList: []
+  editorSpawnAmount: 0
+  stageManager: {fileID: 0}
