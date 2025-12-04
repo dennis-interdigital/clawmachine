@@ -427,6 +427,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1246718814020996481}
   col: {fileID: 625693627054618780}
+  prizeData:
+    id: 
+    name: 
+    rarity: 0
 --- !u!136 &625693627054618780
 CapsuleCollider:
   m_ObjectHideFlags: 0
