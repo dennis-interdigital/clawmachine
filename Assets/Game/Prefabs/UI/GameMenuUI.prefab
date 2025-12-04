@@ -572,6 +572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d16ed6619907b438577588b9cc06b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystick: {fileID: 103367532892472941}
   buttonGrab: {fileID: 221929146551601148}
   buttonRotateLeft: {fileID: 7431434920596107644}
   buttonRotateRight: {fileID: 8613918737408926766}
@@ -1874,3 +1875,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8074122553862551660}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &103367532892472941 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8170153791668043265, guid: 0d230cc8be529a542a08cb878ab14b18,
+    type: 3}
+  m_PrefabInstance: {fileID: 8074122553862551660}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a47f546fc70ec8428172694e78e4288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
