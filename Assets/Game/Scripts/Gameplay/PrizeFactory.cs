@@ -12,10 +12,13 @@ public class PrizeFactory : MonoBehaviour
     public int editorSpawnAmount;
 
     [HideInInspector] public StageManager stageManager;
-
-    public void Init(StageManager inStageManager)
+    GameManager gameManager;
+    [HideInInspector] public InventoryManager inventoryManager;
+    public void Init(GameManager inGameManager)
     {
-        stageManager = inStageManager;
+        gameManager = inGameManager;
+        inventoryManager = gameManager.inventoryManager;
+        stageManager = gameManager.stageManager;
 
         SpawnPrize(10);
     }

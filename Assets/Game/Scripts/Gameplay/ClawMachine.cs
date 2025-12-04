@@ -85,17 +85,21 @@ public class ClawMachine : MonoBehaviour
         rootZBar.localPosition = new Vector3(rootZBar.localPosition.x, rootZBar.localPosition.y, pos.z);
     }
 
-    public void OnClickGrab()
+    public void StartGrabSequence(bool success)
     {
         if (!isGrabSequence)
         {
             isGrabSequence = true;
-            StartCoroutine(GrabSequence());
+            StartCoroutine(GrabSequence(success));
         }
     }
 
-    IEnumerator GrabSequence()
+    IEnumerator GrabSequence(bool success)
     {
+        string prizeId = string.Empty;
+        bool isDoneFailSequence = false;
+        var rope = ropeMesh.GetRopeScript();
+
         OpenClaw();
         yield return new WaitForSeconds(0.3f);
 
@@ -105,29 +109,54 @@ public class ClawMachine : MonoBehaviour
         while (!shouldContinue)
         {
             float dt = Time.deltaTime;
-            var rope = ropeMesh.GetRopeScript();
 
             rope.ropeLength += yMoveSpeed * dt;
             rope.ropeLength = Mathf.Min(rope.ropeLength, ropeMaxLength);
 
             bool reachBottom = rope.ropeLength >= ropeMaxLength;
             bool hasPrize = grabbedPrize != null;
+            bool valid = reachBottom || hasPrize;
+            shouldContinue = valid;
 
-            shouldContinue = reachBottom || hasPrize;
             yield return null;
+        }
+
+        if(grabbedPrize != null)
+        {
+            prizeId = grabbedPrize.prizeData.id;
         }
 
         CloseClaw();
         yield return new WaitForSeconds(0.2f);
 
+        float rndLengthOnFail = 0;
+
+        if (!success)
+        {
+            float offset = 0.5f;
+            rndLengthOnFail = Random.Range(ropeMinLength + offset, rope.ropeLength - offset);
+        }
+
         shouldContinue = false;
         while (!shouldContinue)
         {
             float dt = Time.deltaTime;
-            var rope = ropeMesh.GetRopeScript();
 
             rope.ropeLength -= yMoveSpeed * dt;
             rope.ropeLength = Mathf.Max(rope.ropeLength, ropeMinLength);
+
+            bool isFail = !success;
+            bool hasAnyGrabbedPrize = grabbedPrize != null;
+            bool valid = isFail && hasAnyGrabbedPrize && !isDoneFailSequence;
+
+            if (valid)
+            {
+                if (rope.ropeLength <= rndLengthOnFail)
+                {
+                    DropPrize(false);
+                    isDoneFailSequence = true;
+                }
+            }
 
             bool reachTop = rope.ropeLength <= ropeMinLength;
             shouldContinue = reachTop;
@@ -166,6 +195,12 @@ public class ClawMachine : MonoBehaviour
         }
 
         grabArea.SetColliderEnable(false);
+
+        if (!success && grabbedPrize != null)
+        {
+            stageManager.SaveRecord(prizeId, false);
+        }
+
         isGrabSequence = false;
     }
 
@@ -173,16 +208,17 @@ public class ClawMachine : MonoBehaviour
     {
         grabbedPrize = prize.GetComponent<Prize>();
         grabbedPrize.transform.parent = rootGrabbedPrize;
-        //var rootPos = rootGrabbedPrize.localPosition;
-        //Vector3 newPos = new Vector3(rootPos.x, grabbedPrize.transform.localPosition.y, rootPos.z);
         grabbedPrize.transform.DOLocalMove(Vector3.zero, 0.5f);
         grabbedPrize.SetPhysics(false);
     }
 
-    public void DropPrize()
+    public void DropPrize(bool animate = true)
     {
-        OpenClaw();
-        grabbedPrize.transform.parent = stageManager.prizeFactory.transform;
+        if(animate)
+        {
+            OpenClaw();
+        }
+        grabbedPrize.transform.SetParent(stageManager.prizeFactory.transform);
         grabbedPrize.SetPhysics(true);
         grabbedPrize = null;
     }
