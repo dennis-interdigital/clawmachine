@@ -18,7 +18,7 @@ public class ClawMachine : MonoBehaviour
     public ClawMachineGrabArea grabArea;
     public Transform rootGrabbedPrize;
 
-    Prize grabbedPrize;
+    [HideInInspector] public Prize grabbedPrize;
 
     [Header("Config")]
     [SerializeField] float moveSpeed;
@@ -173,8 +173,8 @@ public class ClawMachine : MonoBehaviour
     {
         grabbedPrize = prize.GetComponent<Prize>();
         grabbedPrize.transform.parent = rootGrabbedPrize;
-        var rootPos = rootGrabbedPrize.localPosition;
-        Vector3 newPos = new Vector3(rootPos.x, grabbedPrize.transform.localPosition.y, rootPos.z);
+        //var rootPos = rootGrabbedPrize.localPosition;
+        //Vector3 newPos = new Vector3(rootPos.x, grabbedPrize.transform.localPosition.y, rootPos.z);
         grabbedPrize.transform.DOLocalMove(Vector3.zero, 0.5f);
         grabbedPrize.SetPhysics(false);
     }

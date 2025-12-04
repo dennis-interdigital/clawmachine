@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3126962915114336744}
-  col: {fileID: 522713573546601173}
+  col: {fileID: 2503074839801260754}
 --- !u!136 &2503074839801260754
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -345,7 +345,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -485,7 +485,6 @@ GameObject:
   - component: {fileID: 8401855024121114231}
   - component: {fileID: 4474846412992146168}
   - component: {fileID: 1231130796435178166}
-  - component: {fileID: 522713573546601173}
   m_Layer: 0
   m_Name: Herring
   m_TagString: Untagged
@@ -565,29 +564,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!136 &522713573546601173
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4102511320196458625}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.13
-  m_Height: 1
-  m_Direction: 2
-  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!1 &4190176234133225742
 GameObject:
   m_ObjectHideFlags: 0

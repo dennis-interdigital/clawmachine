@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae8bee3ee9a23d4fbdd9f1bd705da6a, type: 3}
+  m_Name: PrizeSO
+  m_EditorClassIdentifier: 
+  prizeDatas:
+  - id: 1001
+    name: Colobus
+    rarity: 0
+  - id: 1002
+    name: Gecko
+    rarity: 0
+  - id: 1003
+    name: Herring
+    rarity: 0
+  - id: 1004
+    name: Muskrat
+    rarity: 0
+  - id: 1005
+    name: Pudu
+    rarity: 0
+  - id: 1006
+    name: Sparrow
+    rarity: 0
+  - id: 1007
+    name: Squid
+    rarity: 0
