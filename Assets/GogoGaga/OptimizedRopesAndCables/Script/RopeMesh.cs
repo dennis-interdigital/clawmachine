@@ -121,7 +121,6 @@ namespace GogoGaga.OptimizedRopesAndCables
 
         public void CreateRopeMesh(Vector3[] points, float radius, int segmentsPerWire)
         {
-            // Validate input
             if (points == null || points.Length < 2)
             {
                 Debug.LogError("Need at least two points to create a rope mesh.", gameObject);
@@ -138,22 +137,29 @@ namespace GogoGaga.OptimizedRopesAndCables
                 ropeMesh.Clear();
             }
 
-            Vector3 gameObjectPosition = transform.position;
-
-            // Clear the lists before using them
             vertices.Clear();
             triangles.Clear();
             uvs.Clear();
 
             float currentLength = 0f;
+            Vector3 lastDirection = Vector3.forward; // fallback
 
-            // Generate vertices and UVs for each segment along the points
+            // main tube
             for (int i = 0; i < points.Length; i++)
             {
-                Vector3 direction = i < points.Length - 1 ? points[i + 1] - points[i] : points[i] - points[i - 1];
+                Vector3 direction;
+                if (i < points.Length - 1)
+                    direction = points[i + 1] - points[i];
+                else
+                    direction = points[i] - points[i - 1];
+
+                if (direction.sqrMagnitude < 0.000001f)
+                    direction = lastDirection;
+                else
+                    lastDirection = direction;
+
                 Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
 
-                // Create vertices around a circle at this point
                 for (int j = 0; j <= segmentsPerWire; j++)
                 {
                     float angle = j * Mathf.PI * 2f / segmentsPerWire;
@@ -171,7 +177,7 @@ namespace GogoGaga.OptimizedRopesAndCables
                 }
             }
 
-            // Generate triangles for each segment
+            // triangles for tube
             for (int i = 0; i < points.Length - 1; i++)
             {
                 for (int j = 0; j < segmentsPerWire; j++)
@@ -191,11 +197,17 @@ namespace GogoGaga.OptimizedRopesAndCables
                 }
             }
 
-            // Generate vertices, triangles, and UVs for the start cap
+            // start cap
             int startCapCenterIndex = vertices.Count;
             vertices.Add(transform.InverseTransformPoint(points[0]));
-            uvs.Add(new Vector2(0.5f, 0)); // Center of the cap
-            Quaternion startRotation = Quaternion.LookRotation(points[1] - points[0]);
+            uvs.Add(new Vector2(0.5f, 0));
+
+            Vector3 startDir = points[1] - points[0];
+            if (startDir.sqrMagnitude < 0.000001f)
+                startDir = lastDirection.sqrMagnitude > 0 ? lastDirection : Vector3.forward;
+
+            Quaternion startRotation = Quaternion.LookRotation(startDir, Vector3.up);
+
             for (int j = 0; j <= segmentsPerWire; j++)
             {
                 float angle = j * Mathf.PI * 2f / segmentsPerWire;
@@ -209,14 +221,20 @@ namespace GogoGaga.OptimizedRopesAndCables
                     triangles.Add(startCapCenterIndex + j + 2);
                 }
 
-                uvs.Add(new Vector2((Mathf.Cos(angle) + 1) / 2, (Mathf.Sin(angle) + 1) / 2));
+                uvs.Add(new Vector2((Mathf.Cos(angle) + 1) * 0.5f, (Mathf.Sin(angle) + 1) * 0.5f));
             }
 
-            // Generate vertices, triangles, and UVs for the end cap
+            // end cap
             int endCapCenterIndex = vertices.Count;
             vertices.Add(transform.InverseTransformPoint(points[points.Length - 1]));
-            uvs.Add(new Vector2(0.5f, currentLength * tilingPerMeter)); // Center of the cap
-            Quaternion endRotation = Quaternion.LookRotation(points[points.Length - 1] - points[points.Length - 2]);
+            uvs.Add(new Vector2(0.5f, currentLength * tilingPerMeter));
+
+            Vector3 endDir = points[points.Length - 1] - points[points.Length - 2];
+            if (endDir.sqrMagnitude < 0.000001f)
+                endDir = lastDirection.sqrMagnitude > 0 ? lastDirection : Vector3.forward;
+
+            Quaternion endRotation = Quaternion.LookRotation(endDir, Vector3.up);
+
             for (int j = 0; j <= segmentsPerWire; j++)
             {
                 float angle = j * Mathf.PI * 2f / segmentsPerWire;
@@ -230,14 +248,16 @@ namespace GogoGaga.OptimizedRopesAndCables
                     triangles.Add(endCapCenterIndex + j + 2);
                 }
 
-                uvs.Add(new Vector2((Mathf.Cos(angle) + 1) / 2, (Mathf.Sin(angle) + 1) / 2));
+                uvs.Add(new Vector2((Mathf.Cos(angle) + 1) * 0.5f, (Mathf.Sin(angle) + 1) * 0.5f));
             }
 
             ropeMesh.vertices = vertices.ToArray();
             ropeMesh.triangles = triangles.ToArray();
             ropeMesh.uv = uvs.ToArray();
             ropeMesh.RecalculateNormals();
+            ropeMesh.RecalculateBounds();
         }
+
 
         void GenerateMesh()
         {

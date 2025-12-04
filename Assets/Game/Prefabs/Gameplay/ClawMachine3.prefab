@@ -2602,7 +2602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OverallDivision: 25
   ropeWidth: 0.03
-  radialDivision: 8
+  radialDivision: 20
   material: {fileID: 0}
   tilingPerMeter: 1
 --- !u!1 &8067938412756902907
