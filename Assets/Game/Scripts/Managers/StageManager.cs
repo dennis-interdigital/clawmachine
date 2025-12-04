@@ -1,5 +1,5 @@
-using JetBrains.Annotations;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +16,9 @@ public class StageManager : MonoBehaviour
     GameManager gameManager;
     UserData userData;
 
+    [Header("Probability Config")]
+    public int successRate;
+
     public FloatingJoystick joystick;
     [SerializeField] ClawMachine clawMachine;
     public PrizeFactory prizeFactory;
@@ -27,7 +30,13 @@ public class StageManager : MonoBehaviour
         gameManager = inGameManager;
         userData = gameManager.userData;
 
-        if(userData.prizeRecordDatas == null)
+        if(userData.probabilityDatas == null)
+        {
+            userData.probabilityDatas = new List<bool>();
+        }
+
+
+        if (userData.prizeRecordDatas == null)
         {
             userData.prizeRecordDatas = new System.Collections.Generic.List<PrizeRecordData>();
         }
@@ -38,7 +47,7 @@ public class StageManager : MonoBehaviour
         prizeFactory.Init(this);
         clawMachine.Init(this);
 
-        buttonGrab.onClick.AddListener(clawMachine.OnClickGrab);
+        buttonGrab.onClick.AddListener(OnClickGrab);
     }
 
     public void DoUpdate()
@@ -73,5 +82,29 @@ public class StageManager : MonoBehaviour
             $"Time: {dateTimeNow}";
 
         Debug.Log(logString);
+    }
+
+    void GenerateProbabilityDatas()
+    {
+        for (int i = 0;i < 100; i++)
+        {
+            bool success = i < successRate;
+            userData.probabilityDatas.Add(success);
+        }
+
+        userData.probabilityDatas.Shuffle();
+    }
+
+    void OnClickGrab()
+    {
+        if(userData.probabilityDatas.Count == 0)
+        {
+            GenerateProbabilityDatas();
+        }
+
+        bool success = userData.probabilityDatas[0];
+        userData.probabilityDatas.RemoveAt(0);
+
+        clawMachine.StartGrabSequence(success);
     }
 }

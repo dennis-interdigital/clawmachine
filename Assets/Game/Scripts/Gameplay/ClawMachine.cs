@@ -85,16 +85,16 @@ public class ClawMachine : MonoBehaviour
         rootZBar.localPosition = new Vector3(rootZBar.localPosition.x, rootZBar.localPosition.y, pos.z);
     }
 
-    public void OnClickGrab()
+    public void StartGrabSequence(bool success)
     {
         if (!isGrabSequence)
         {
             isGrabSequence = true;
-            StartCoroutine(GrabSequence());
+            StartCoroutine(GrabSequence(success));
         }
     }
 
-    IEnumerator GrabSequence()
+    IEnumerator GrabSequence(bool success)
     {
         OpenClaw();
         yield return new WaitForSeconds(0.3f);
