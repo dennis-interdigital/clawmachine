@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GameMenuUI : BaseUI
 {
     [SerializeField] TextMeshProUGUI textTimer;
+    [SerializeField] Image imageTimerFill;
+    [SerializeField] float maxTimerDuration = 30f;
     public FloatingJoystick joystick;
     [SerializeField] Button buttonGrab;
     [SerializeField] Button buttonRotateLeft;
@@ -25,6 +27,8 @@ public class GameMenuUI : BaseUI
         buttonRotateLeft.onClick.AddListener(OnClickRotateLeft);
         buttonRotateRight.onClick.AddListener(OnClickRotateRight);
 
+        if (imageTimerFill != null)
+            imageTimerFill.fillAmount = 0f;
     }
 
     public override void Show(params object[] payload)
@@ -37,9 +41,13 @@ public class GameMenuUI : BaseUI
 
     public override void DoUpdate(float dt)
     {
-        int timerInt = (int)stageManager.tPlayTimer + 1;
+        float t = stageManager.tPlayTimer;
+        int timerInt = (int)t + 1;
         string timerString = timerInt.ToString("00");
         textTimer.SetText(timerString);
+
+        if (imageTimerFill != null && stageManager.playTimer > 0f)
+            imageTimerFill.fillAmount = Mathf.Clamp01(t / stageManager.playTimer);
     }
 
     public void RefreshUI()
@@ -63,7 +71,7 @@ public class GameMenuUI : BaseUI
         cg.alpha = 0f;
 
         Vector3 startPos = transform.localPosition;
-        transform.localPosition = new Vector3(startPos.x, startPos.y-300f, startPos.z);
+        transform.localPosition = new Vector3(startPos.x, startPos.y - 300f, startPos.z);
 
         transform.DOLocalMoveY(-670, 0.3f).SetEase(Ease.OutBack);
         cg.DOFade(1f, 0.25f);
@@ -77,7 +85,6 @@ public class GameMenuUI : BaseUI
         transform.DOLocalMoveY(-700, 0.25f).SetEase(Ease.InBack);
         cg.DOFade(0f, 0.2f);
     }
-
 
     void OnClickGrab()
     {

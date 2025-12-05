@@ -1,11 +1,14 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class ResultPopup : BaseUI
 {
     [SerializeField] GameObject rootFailed;
     [SerializeField] GameObject rootSuccess;
+    [SerializeField] CanvasGroup cgFailed;
+    [SerializeField] CanvasGroup cgSuccess;
     [SerializeField] TextMeshProUGUI textPrizeName;
     [SerializeField] TextMeshProUGUI textPrizeRarity;
     [SerializeField] Button buttonClose;
@@ -30,17 +33,15 @@ public class ResultPopup : BaseUI
         rootSuccess.SetActive(success);
         rootFailed.SetActive(!success);
 
-        string buttonCloseString = success ? "YAY!" : "okay";
+        PlayShowAnim(success);
+
+        string buttonCloseString = success ? "OK" : "OK";
         textButtonClose.SetText(buttonCloseString);
 
         if (success)
         {
-            string name = data.name;
-            PrizeRarity rarity = data.rarity;
-
-            textPrizeName.SetText(name);
-            textPrizeRarity.SetText(rarity.ToString());
-
+            textPrizeName.SetText(data.name);
+            textPrizeRarity.SetText(data.rarity.ToString());
             stageManager.SetPrizeResult(true, index);
         }
 
@@ -49,8 +50,36 @@ public class ResultPopup : BaseUI
 
     public override void Hide(params object[] payload)
     {
+        PlayHideAnim(rootSuccess.activeSelf);
         stageManager.SetPrizeResult(false);
         base.Hide(payload);
+    }
+
+    void PlayShowAnim(bool success)
+    {
+        CanvasGroup cg = success ? cgSuccess : cgFailed;
+        Transform root = success ? rootSuccess.transform : rootFailed.transform;
+
+        cg.DOKill();
+        root.DOKill();
+
+        cg.alpha = 0f;
+        root.localScale = Vector3.zero;
+
+        cg.DOFade(1f, 0.25f);
+        root.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+    }
+
+    void PlayHideAnim(bool success)
+    {
+        CanvasGroup cg = success ? cgSuccess : cgFailed;
+        Transform root = success ? rootSuccess.transform : rootFailed.transform;
+
+        cg.DOKill();
+        root.DOKill();
+
+        cg.DOFade(0f, 0.2f);
+        root.DOScale(0f, 0.25f).SetEase(Ease.InBack);
     }
 
     void OnClickClose()
@@ -58,5 +87,4 @@ public class ResultPopup : BaseUI
         uiManager.HidePopup(PopupState.Result);
         uiManager.ShowUI(UIState.MainMenu);
     }
-
 }
