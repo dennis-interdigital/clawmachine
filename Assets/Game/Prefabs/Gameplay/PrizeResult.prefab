@@ -209,6 +209,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sparrow_prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 6946137969002321716, guid: a324a72d76bc2824da2f972d518dab53,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -232,6 +237,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gecko_prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 5581425724468120809, guid: 7cca776cd819a4e41a36b2ac89ea6a38,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6727496191911988995, guid: 7cca776cd819a4e41a36b2ac89ea6a38,
         type: 3}
@@ -357,6 +367,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Muskrat_prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 7467735368541512851, guid: 32e1fac1bed3bfe42b817dc67a3b169a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -431,6 +446,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monkey_prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 5360423504011627169, guid: 1a910002360146d4cb75b9fcf1a1ad8b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -454,6 +474,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Squid_prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381029897758926832, guid: 14af3da76523a2a46b7f4ff4ed97cf95,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730231578799401585, guid: 14af3da76523a2a46b7f4ff4ed97cf95,
         type: 3}
@@ -529,6 +554,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pudu_prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 3177204653093105148, guid: f8eddd07e0c36084dbeed8619f8b7389,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6551190722478651912, guid: f8eddd07e0c36084dbeed8619f8b7389,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -602,6 +632,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Herring_prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 3385332768987498292, guid: 6a2dcabd0288cca4383fea53e34a3e0f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6601446333198088476, guid: 6a2dcabd0288cca4383fea53e34a3e0f,
         type: 3}
