@@ -44,7 +44,7 @@ public class ResultPopup : BaseUI
             textPrizeRarity.SetText(data.rarity.ToString());
             stageManager.SetPrizeResult(true, index);
         }
-
+        
         base.Show();
     }
 
@@ -86,5 +86,6 @@ public class ResultPopup : BaseUI
     {
         uiManager.HidePopup(PopupState.Result);
         uiManager.ShowUI(UIState.MainMenu);
+        stageManager.prizeFactory.CheckSpawnPrize();
     }
 }

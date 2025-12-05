@@ -15,13 +15,13 @@ MonoBehaviour:
   successRates: 5a00000046000000320000001e0000000a00000005000000
   prizeDatas:
   - id: 1001
-    name: Colobus
-    rarity: 0
-  - id: 1002
     name: Gecko
     rarity: 0
-  - id: 1003
+  - id: 1002
     name: Herring
+    rarity: 0
+  - id: 1003
+    name: Monkey
     rarity: 1
   - id: 1004
     name: Muskrat
