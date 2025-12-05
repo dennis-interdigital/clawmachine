@@ -50,7 +50,7 @@ public class StageManager : MonoBehaviour
             }
         }
 
-        string json = JsonUtility.ToJson(userData.probabilityDatas);
+        string json = JsonUtility.ToJson(userData);
         Debug.Log(json);
 
         if (userData.prizeRecordDatas == null)
@@ -133,28 +133,28 @@ public class StageManager : MonoBehaviour
 
     public void GenerateProbabilityDatas(PrizeRarity rarity)
     {
+        int counter = 100;
         int rarityIndex = (int)rarity;
         int successRate =  prizeFactory.prizeSO.successRates[rarityIndex];
 
         List<bool> probabilityDatas = userData.probabilityDatas[rarityIndex];
 
-        
-        for (int i = 0; i < 100; i++)
+        int logTotalSuccess = 0;
+
+        for (int i = 0; i < counter; i++)
         {
             bool success = i < successRate;
             userData.probabilityDatas[rarityIndex].Add(success);
-            
+
+            if (success) logTotalSuccess++;
         }
+
+        int logTotalFail = counter - logTotalSuccess;
 
         userData.probabilityDatas[rarityIndex].Shuffle();
 
         List<bool> successList = userData.probabilityDatas[rarityIndex];
-        string log = $"{rarity}: ";
-        int count = successList.Count;
-        for (int i = 0; i < count; i++)
-        {
-            log += $"{successList[i]},";
-        }
+        string log = $"{rarity}: Success={logTotalSuccess}, failed={logTotalFail}";
         Debug.Log(log);
     }
 

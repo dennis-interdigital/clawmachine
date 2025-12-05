@@ -143,7 +143,7 @@ public class ClawMachine : MonoBehaviour
 
             prizeId = grabbedPrize.prizeData.id;
 
-            Debug.Log($"Grabbing prize {success}");
+            Debug.Log($"Grabbing prize {prizeData.name},{prizeData.rarity}: {success}");
         }
 
         CloseClaw();
