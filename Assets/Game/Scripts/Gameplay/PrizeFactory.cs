@@ -10,10 +10,13 @@ public class PrizeFactory : MonoBehaviour
     public List<Prize> activePrizeList;
 
     public int editorSpawnAmount;
+    public Vector2 xOffsetRange;
+    public Vector2 zOffsetRange;
 
     [HideInInspector] public StageManager stageManager;
     GameManager gameManager;
     [HideInInspector] public InventoryManager inventoryManager;
+
     public void Init(GameManager inGameManager)
     {
         gameManager = inGameManager;
@@ -36,7 +39,14 @@ public class PrizeFactory : MonoBehaviour
             rndIndex = Random.Range(0, prefabPrizes.Length);
             PrizeData data = prizeSO.prizeDatas[rndIndex];
             Prize prefab = prefabPrizes[rndIndex];
+
             Prize prize = Instantiate(prefab, transform);
+            prize.transform.localPosition = new Vector3(
+                Random.Range(xOffsetRange.x, xOffsetRange.y),
+                0f,
+                Random.Range(zOffsetRange.x, zOffsetRange.y)
+            );
+
             prize.Init(this, data);
             prize.index = rndIndex;
 
