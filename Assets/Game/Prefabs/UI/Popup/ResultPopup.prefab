@@ -156,12 +156,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2672627945062618860}
+  m_Father: {fileID: 596002782189984053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1333}
-  m_SizeDelta: {x: 800, y: 250}
+  m_AnchoredPosition: {x: 0, y: -60.04004}
+  m_SizeDelta: {x: 800, y: 120.15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4983032103908727680
 CanvasRenderer:
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CONGRATS YOU GOT
+  m_text: CONGRATULATION!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f3133cc03b4abe24aa41ea4b64e0eebd, type: 2}
   m_sharedMaterial: {fileID: -2549976827228601444, guid: f3133cc03b4abe24aa41ea4b64e0eebd,
@@ -201,8 +201,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278209917
+  m_fontColor: {r: 0.49056602, g: 0.303892, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -292,9 +292,6 @@ RectTransform:
   m_Children:
   - {fileID: 8123555167047485749}
   - {fileID: 596002782189984053}
-  - {fileID: 1462281654842123096}
-  - {fileID: 2241347146192540021}
-  - {fileID: 7871126342608509748}
   m_Father: {fileID: 580412876345808009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -327,7 +324,7 @@ GameObject:
   - component: {fileID: 5167664662290882515}
   - component: {fileID: 8560164585844766622}
   m_Layer: 5
-  m_Name: Image
+  m_Name: InfoPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -344,13 +341,16 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1462281654842123096}
+  - {fileID: 2241347146192540021}
+  - {fileID: 7871126342608509748}
   m_Father: {fileID: 2672627945062618860}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -398.68}
-  m_SizeDelta: {x: 0, y: 184.64}
+  m_AnchoredPosition: {x: 0, y: -430.9278}
+  m_SizeDelta: {x: 0, y: 249.1356}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &553511538984197612
 CanvasRenderer:
@@ -798,12 +798,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2672627945062618860}
+  m_Father: {fileID: 596002782189984053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 519}
-  m_SizeDelta: {x: 500, y: 250}
+  m_AnchoredPosition: {x: 0, y: 118}
+  m_SizeDelta: {x: 500, y: 103.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8254654887933208151
 CanvasRenderer:
@@ -1093,8 +1093,8 @@ MonoBehaviour:
   rootSuccess: {fileID: 1847267162624604425}
   cgFailed: {fileID: 9032497312112656534}
   cgSuccess: {fileID: 8980422514146814896}
-  textPrizeName: {fileID: 6184666664508626385}
-  textPrizeRarity: {fileID: 8902083017895629995}
+  textPrizeName: {fileID: 8902083017895629995}
+  textPrizeRarity: {fileID: 8748017062750415048}
   buttonClose: {fileID: 3837070996072610361}
   textButtonClose: {fileID: 3093625966616914049}
 --- !u!1 &5122660897969895557
@@ -1394,7 +1394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7871126342608509748
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1407,12 +1407,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2672627945062618860}
+  m_Father: {fileID: 596002782189984053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 410}
-  m_SizeDelta: {x: 500, y: 115.6074}
+  m_AnchoredPosition: {x: 0, y: 42.799}
+  m_SizeDelta: {x: 500, y: 85.597}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2941048742749583282
 CanvasRenderer:
