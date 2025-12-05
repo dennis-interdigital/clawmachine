@@ -112,11 +112,12 @@ public class StageManager : MonoBehaviour
         prizeRecordData.time = now;
 
         int count = userData.prizeRecordDatas.Count;
-        if (count > 100) //TODO config
+        if (count == 100) //TODO config
         {
-            userData.prizeRecordDatas.RemoveAt(0);
+            userData.prizeRecordDatas.RemoveAt(count - 1);
         }
-        userData.prizeRecordDatas.Add(prizeRecordData);
+
+        userData.prizeRecordDatas.Insert(0,prizeRecordData);
 
         string resultLog = status ? "Success" : "Failed";
 
