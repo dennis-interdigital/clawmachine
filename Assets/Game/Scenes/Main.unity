@@ -922,8 +922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3821e3f7cba0b648a97c573218db51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  successRates: 5a00000046000000320000001e0000000a00000005000000
-  playTimer: 0
+  playTimer: 15
   joystick: {fileID: 503924347}
   gameplayObjects: {fileID: 2095708417}
   clawMachine: {fileID: 1298257632}
@@ -937,6 +936,8 @@ MonoBehaviour:
   - {fileID: 937303058}
   - {fileID: 265893985}
   - {fileID: 1169404901}
+  tPlayTimer: 0
+  isRunningTimer: 0
 --- !u!4 &605209620
 Transform:
   m_ObjectHideFlags: 0
@@ -1484,7 +1485,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498345662}
   m_CullTransparentMesh: 1
---- !u!43 &1531520813
+--- !u!1 &1616242206 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2038671636977358241, guid: c383a0aafcac6be45ab54723fae63afc,
+    type: 3}
+  m_PrefabInstance: {fileID: 5146096503745032309}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1634830294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7107961031876390428, guid: c383a0aafcac6be45ab54723fae63afc,
+    type: 3}
+  m_PrefabInstance: {fileID: 5146096503745032309}
+  m_PrefabAsset: {fileID: 0}
+--- !u!43 &1889993542
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1649,18 +1662,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1616242206 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2038671636977358241, guid: c383a0aafcac6be45ab54723fae63afc,
-    type: 3}
-  m_PrefabInstance: {fileID: 5146096503745032309}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1634830294 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7107961031876390428, guid: c383a0aafcac6be45ab54723fae63afc,
-    type: 3}
-  m_PrefabInstance: {fileID: 5146096503745032309}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1947774603
 GameObject:
   m_ObjectHideFlags: 0
@@ -2923,7 +2924,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1531520813}
+      objectReference: {fileID: 1889993542}
     - target: {fileID: 3956212599471758605, guid: 8d5c19b67bf663b4783ec6ba53a1c719,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -30,6 +30,6 @@ public class MainMenuUI : BaseUI
     void OnClickInsertCoin()
     {
         uiManager.ShowUI(UIState.GameMenu);
-        stageManager.isRunningTimer = true;
+        stageManager.ResetStage();
     }
 }

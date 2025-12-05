@@ -67,6 +67,7 @@ public class StageManager : MonoBehaviour
 
     public void ResetStage()
     {
+        isRunningTimer = true;
         hasStartGrabSequence = false;
         tPlayTimer = playTimer;
     }
