@@ -5,7 +5,7 @@ public class UserData
     public int coin;
     public int diamond;
 
-    public List<bool> probabilityDatas;
+    public List<List<bool>> probabilityDatas;
     public List<InventoryData> inventoryDatas;
     public List<PrizeRecordData> prizeRecordDatas;
 

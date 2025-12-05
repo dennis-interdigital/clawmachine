@@ -13,5 +13,25 @@ public class PrizeData
 [CreateAssetMenu(fileName = "PrizeSO", menuName = "SO/PrizeSO")]
 public class PrizeSO : ScriptableObject
 {
+    public List<int> successRates;
     public List<PrizeData> prizeDatas;
+
+    public PrizeRarity GetRarity(string id)
+    {
+        PrizeRarity result = PrizeRarity.Common;
+
+        int count = prizeDatas.Count;
+        for (int i = 0; i < count; i++)
+        {
+            PrizeData data = prizeDatas[i];
+            bool sameId = data.id == id;
+            if (sameId)
+            {
+                result = data.rarity;
+                break;
+            }
+        }
+
+        return result;
+    }
 }

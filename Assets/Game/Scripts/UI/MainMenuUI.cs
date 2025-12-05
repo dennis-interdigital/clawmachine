@@ -4,9 +4,13 @@ using UnityEngine.UI;
 public class MainMenuUI : BaseUI
 {
     [SerializeField] Button buttonInsertCoin;
+
+    StageManager stageManager;
+
     public override void Init(GameManager inGameManager)
     {
         base.Init(inGameManager);
+        stageManager = gameManager.stageManager;
 
         buttonInsertCoin.onClick.AddListener(OnClickInsertCoin);
     }
@@ -26,5 +30,6 @@ public class MainMenuUI : BaseUI
     void OnClickInsertCoin()
     {
         uiManager.ShowUI(UIState.GameMenu);
+        stageManager.isRunningTimer = true;
     }
 }

@@ -1,8 +1,10 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameMenuUI : BaseUI
 {
+    [SerializeField] TextMeshProUGUI textTimer;
     public FloatingJoystick joystick;
     [SerializeField] Button buttonGrab;
     [SerializeField] Button buttonRotateLeft;
@@ -31,6 +33,13 @@ public class GameMenuUI : BaseUI
         base.Show(payload);
     }
 
+    public override void DoUpdate(float dt)
+    {
+        int timerInt = (int)stageManager.tPlayTimer + 1;
+        string timerString = timerInt.ToString("00");
+        textTimer.SetText(timerString);
+    }
+
     public void RefreshUI()
     {
         buttonRotateLeft.interactable = gameplayObjects.targetY > gameplayObjects.minY;
@@ -48,7 +57,7 @@ public class GameMenuUI : BaseUI
     void OnClickGrab()
     {
         SetButtonEnable(false);
-        stageManager.OnClickGrab();
+        stageManager.StartGrabSequence();
     }
 
     void OnClickRotateLeft()

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using GogoGaga.OptimizedRopesAndCables;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ClawMachine : MonoBehaviour
@@ -30,14 +31,16 @@ public class ClawMachine : MonoBehaviour
 
     StageManager stageManager;
     FloatingJoystick joystick;
+    UserData userData;
 
     Vector3 clawOpenAngle;
 
     bool isGrabSequence;
 
-    public void Init(StageManager inStageManager)
+    public void Init(GameManager inGameManager)
     {
-        stageManager = inStageManager;
+        stageManager = inGameManager.stageManager;
+        userData = inGameManager.userData;
         grabArea.Init(this);
         joystick = stageManager.joystick;
 
@@ -83,20 +86,22 @@ public class ClawMachine : MonoBehaviour
         rootZBar.localPosition = new Vector3(rootZBar.localPosition.x, rootZBar.localPosition.y, pos.z);
     }
 
-    public void StartGrabSequence(bool success)
+    public void StartGrabSequence()
     {
         if (!isGrabSequence)
         {
             isGrabSequence = true;
-            StartCoroutine(GrabSequence(success));
+            StartCoroutine(GrabSequence());
         }
     }
 
-    IEnumerator GrabSequence(bool success)
+    IEnumerator GrabSequence()
     {
         string prizeId = string.Empty;
         bool isDoneFailSequence = false;
         var rope = ropeMesh.GetRopeScript();
+
+        bool success = false;
 
         OpenClaw();
         yield return new WaitForSeconds(0.3f);
@@ -121,7 +126,24 @@ public class ClawMachine : MonoBehaviour
 
         if(grabbedPrize != null)
         {
+            //Probability here
+            PrizeData prizeData = grabbedPrize.prizeData;
+            PrizeRarity rarity = prizeData.rarity;
+            int rarityIndex = (int)rarity;
+            List<bool> probabilityList = userData.probabilityDatas[rarityIndex];
+
+            int count = probabilityList.Count;
+            if(count <= 0)
+            {
+                stageManager.GenerateProbabilityDatas(rarity);
+            }
+
+            success = probabilityList[0];
+            userData.probabilityDatas[rarityIndex].RemoveAt(0);
+
             prizeId = grabbedPrize.prizeData.id;
+
+            Debug.Log($"Grabbing prize {success}");
         }
 
         CloseClaw();

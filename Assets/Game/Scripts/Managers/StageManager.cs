@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 [Serializable]
 public class PrizeRecordData
@@ -17,8 +15,8 @@ public class StageManager : MonoBehaviour
     GameManager gameManager;
     UserData userData;
 
-    [Header("Probability Config")]
-    public int successRate;
+    [Header("Config")]
+    public float playTimer;
 
     public FloatingJoystick joystick;
     public GameplayObjects gameplayObjects;
@@ -28,6 +26,10 @@ public class StageManager : MonoBehaviour
     public GameObject objWallresult;
     public GameObject[] objPrizeResults;
 
+    public float tPlayTimer;
+    bool hasStartGrabSequence;
+    [HideInInspector] public bool isRunningTimer;
+
     public void Init(GameManager inGameManager)
     {
         gameManager = inGameManager;
@@ -35,11 +37,21 @@ public class StageManager : MonoBehaviour
 
         joystick.gameObject.SetActive(false);
 
-        if(userData.probabilityDatas == null)
+        int count = (int)PrizeRarity.COUNT;
+        if (userData.probabilityDatas == null)
         {
-            userData.probabilityDatas = new List<bool>();
+            userData.probabilityDatas = new List<List<bool>>();
+            
+            for (int i = 0; i < count; i++)
+            {
+                List<bool> data = new List<bool>();
+                userData.probabilityDatas.Add(data);
+                GenerateProbabilityDatas((PrizeRarity)i);
+            }
         }
-        GenerateProbabilityDatas();
+
+        string json = JsonUtility.ToJson(userData.probabilityDatas);
+        Debug.Log(json);
 
         if (userData.prizeRecordDatas == null)
         {
@@ -50,13 +62,39 @@ public class StageManager : MonoBehaviour
         rtJoystick.sizeDelta = new Vector2(Screen.width, Screen.height / 2);
 
         prizeFactory.Init(gameManager);
-        clawMachine.Init(this);
+        clawMachine.Init(gameManager);
+    }
+
+    public void ResetStage()
+    {
+        hasStartGrabSequence = false;
+        tPlayTimer = playTimer;
     }
 
     public void DoUpdate(float dt)
     {
         gameplayObjects.DoUpdate(dt);
         clawMachine.DoUpdate(dt);
+
+        if (isRunningTimer)
+        {
+            if (!hasStartGrabSequence)
+            {
+                if (tPlayTimer <= 0)
+                {
+                    GameMenuUI gameMenuUI = gameManager.uiManager.currentActiveUI as GameMenuUI;
+                    if (gameMenuUI != null)
+                    {
+                        gameMenuUI.SetButtonEnable(false);
+                    }
+                    StartGrabSequence();
+                }
+                else
+                {
+                    tPlayTimer -= dt;
+                }
+            }
+        }
     }
 
     public void SaveRecord(PrizeData prizeData, int prizeIndex, bool status)
@@ -92,22 +130,29 @@ public class StageManager : MonoBehaviour
         Debug.Log(logString);
     }
 
-    void GenerateProbabilityDatas()
+    public void GenerateProbabilityDatas(PrizeRarity rarity)
     {
-        string log = string.Empty;
+        int rarityIndex = (int)rarity;
+        int successRate =  prizeFactory.prizeSO.successRates[rarityIndex];
 
+        List<bool> probabilityDatas = userData.probabilityDatas[rarityIndex];
+
+        
         for (int i = 0; i < 100; i++)
         {
             bool success = i < successRate;
-            userData.probabilityDatas.Add(success);
+            userData.probabilityDatas[rarityIndex].Add(success);
+            
         }
 
-        userData.probabilityDatas.Shuffle();
+        userData.probabilityDatas[rarityIndex].Shuffle();
 
-        int count = userData.probabilityDatas.Count;
+        List<bool> successList = userData.probabilityDatas[rarityIndex];
+        string log = $"{rarity}: ";
+        int count = successList.Count;
         for (int i = 0; i < count; i++)
         {
-            log += $"{userData.probabilityDatas[i]},";
+            log += $"{successList[i]},";
         }
         Debug.Log(log);
     }
@@ -126,18 +171,11 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    public void OnClickGrab()
+    public void StartGrabSequence()
     {
-        if (userData.probabilityDatas.Count == 0)
-        {
-            GenerateProbabilityDatas();
-        }
-
-        bool success = userData.probabilityDatas[0];
-        userData.probabilityDatas.RemoveAt(0);
-
-        clawMachine.StartGrabSequence(success);
-
-        Debug.Log($"START GRAB SEUQNCE: {success}");
+        clawMachine.StartGrabSequence();
+        hasStartGrabSequence = true;
+        isRunningTimer = false;
+        Debug.Log("START GRAB SEUQNCE");
     }
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fae8bee3ee9a23d4fbdd9f1bd705da6a, type: 3}
   m_Name: PrizeSO
   m_EditorClassIdentifier: 
+  successRates: 5a00000046000000320000001e0000000a00000005000000
   prizeDatas:
   - id: 1001
     name: Colobus
@@ -21,16 +22,16 @@ MonoBehaviour:
     rarity: 0
   - id: 1003
     name: Herring
-    rarity: 0
+    rarity: 1
   - id: 1004
     name: Muskrat
-    rarity: 0
+    rarity: 2
   - id: 1005
     name: Pudu
-    rarity: 0
+    rarity: 3
   - id: 1006
     name: Sparrow
-    rarity: 0
+    rarity: 4
   - id: 1007
     name: Squid
-    rarity: 0
+    rarity: 5

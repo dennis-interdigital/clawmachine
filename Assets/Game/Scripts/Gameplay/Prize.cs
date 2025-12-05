@@ -6,9 +6,10 @@ public enum PrizeRarity
     Common,
     Uncommon,
     Rare,
-    VerRare,
+    VeryRare,
     Epic,
-    Legend
+    Legend,
+    COUNT
 }
 
 public class Prize : MonoBehaviour
