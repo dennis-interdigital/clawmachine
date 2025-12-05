@@ -32,15 +32,17 @@ public class RecordPopup : BaseUI
         }
         recordItemUIs.Clear();
 
+        int index = 0;
         count = userData.prizeRecordDatas.Count;
         for (int i = count - 1; i >= 0; i--)
         {
             PrizeRecordData data = userData.prizeRecordDatas[i];
 
             RecordItemUI item = Instantiate(prefabRecordItem, rootItem);
-            item.SetItem(gameManager, data, i);
+            item.SetItem(gameManager, data, index);
 
             recordItemUIs.Add(item);
+            index++;
         }
 
         base.Show(payload);

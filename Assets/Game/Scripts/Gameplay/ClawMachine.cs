@@ -1,4 +1,5 @@
 using DG.Tweening;
+using DG.Tweening.Core.Easing;
 using GogoGaga.OptimizedRopesAndCables;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ public class ClawMachine : MonoBehaviour
     Vector3 moveDirection;
 
     StageManager stageManager;
+    UIManager uiManager;
     FloatingJoystick joystick;
     UserData userData;
 
@@ -41,6 +43,7 @@ public class ClawMachine : MonoBehaviour
     public void Init(GameManager inGameManager)
     {
         stageManager = inGameManager.stageManager;
+        uiManager = inGameManager.uiManager;
         userData = inGameManager.userData;
         grabArea.Init(this);
         joystick = stageManager.joystick;
@@ -102,6 +105,7 @@ public class ClawMachine : MonoBehaviour
         bool isDoneFailSequence = false;
         var rope = ropeMesh.GetRopeScript();
 
+        bool isGrabPrize = false;
         bool success = false;
 
         OpenClaw();
@@ -127,6 +131,7 @@ public class ClawMachine : MonoBehaviour
 
         if(grabbedPrize != null)
         {
+            isGrabPrize = true;
             //Probability here
             PrizeData prizeData = grabbedPrize.prizeData;
             PrizeRarity rarity = prizeData.rarity;
@@ -219,7 +224,14 @@ public class ClawMachine : MonoBehaviour
         }
         else
         {
-            stageManager.SaveRecord(null, 0, false);
+            if (isGrabPrize)
+            {
+                stageManager.SaveRecord(null, prizeId, 0, false);
+            }
+            else
+            {
+                uiManager.ShowPopup(PopupState.Result, success, null, 0);
+            }
         }
 
         ResetClawRotation();

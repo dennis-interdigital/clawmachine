@@ -98,7 +98,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    public void SaveRecord(PrizeData prizeData, int prizeIndex, bool status)
+    public void SaveRecord(PrizeData prizeData, string prizeId, int prizeIndex, bool status)
     {
         PrizeRecordData prizeRecordData = new PrizeRecordData();
 
@@ -107,17 +107,17 @@ public class StageManager : MonoBehaviour
 
         long now = ((DateTimeOffset)dateTimeNow).ToUnixTimeSeconds();
 
-        if (prizeData != null) prizeRecordData.prizeId = prizeData.id;
+        prizeRecordData.prizeId = prizeId;
         prizeRecordData.status = status;
         prizeRecordData.time = now;
 
         int count = userData.prizeRecordDatas.Count;
         if (count == 100) //TODO config
         {
-            userData.prizeRecordDatas.RemoveAt(count - 1);
+            userData.prizeRecordDatas.RemoveAt(0);
         }
 
-        userData.prizeRecordDatas.Insert(0,prizeRecordData);
+        userData.prizeRecordDatas.Add(prizeRecordData);
 
         string resultLog = status ? "Success" : "Failed";
 

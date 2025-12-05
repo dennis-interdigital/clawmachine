@@ -27,14 +27,15 @@ public class RecordItemUI : MonoBehaviour
         PrizeData prizeData = prizeFactory.prizeSO.GetData(id);
         string name = prizeData.name;
 
-        DateTime dateTime = DateTimeOffset.FromUnixTimeSeconds(time).DateTime;
+        DateTime dateTime = DateTimeOffset.FromUnixTimeSeconds(time).ToLocalTime().DateTime;
 
         int no = index + 1;
 
         textNo.SetText(no.ToString());
         textName.SetText(name);
 
-        string timeString = $"{dateTime.Day}/{dateTime.Month}/{dateTime.Year}\n{dateTime.Hour}:{dateTime.Minute}";
+        string timeString = $"{dateTime.Day}/{dateTime.Month}/{dateTime.Year}\n{dateTime.Hour.ToString("00")}:{dateTime.Minute.ToString("00")}";
+        textDateTime.SetText(timeString);
 
         Color bgColor = status ? colorSuccess : colorFailed;
         imgBG.color = bgColor;
