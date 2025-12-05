@@ -15,6 +15,7 @@ public class ClawMachine : MonoBehaviour
     [SerializeField] Transform rootMax;
     [SerializeField] Transform rootStartPos;
     [SerializeField] RopeMesh ropeMesh;
+    public Collider prizeDropBlockerCollider;
 
     public ClawMachineGrabArea grabArea;
     public Transform rootGrabbedPrize;
@@ -209,6 +210,8 @@ public class ClawMachine : MonoBehaviour
 
         if (grabbedPrize != null)
         {
+            Physics.IgnoreCollision(prizeDropBlockerCollider, grabbedPrize.col);
+
             DropPrize();
             yield return new WaitForSeconds(0.5f);
 

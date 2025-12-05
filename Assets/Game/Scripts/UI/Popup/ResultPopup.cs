@@ -43,7 +43,7 @@ public class ResultPopup : BaseUI
 
             stageManager.SetPrizeResult(true, index);
         }
-
+        
         base.Show();
     }
 
