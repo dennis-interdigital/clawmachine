@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5d3c9053108fb4d824e0b266ef193f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnRate: 10
+  minAmountToSpawn: 5
   prizeSO: {fileID: 11400000, guid: 5dc94ffcc52b4b9408fc749d9492b75a, type: 2}
   prefabPrizes:
   - {fileID: -7704758841192447206, guid: 7cca776cd819a4e41a36b2ac89ea6a38, type: 3}

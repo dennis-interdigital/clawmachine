@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PrizeFactory : MonoBehaviour
 {
+    [Header("Config")]
+    public int spawnRate;
+    public int minAmountToSpawn;
+
     public PrizeSO prizeSO;
     public Prize[] prefabPrizes;
 
@@ -23,7 +27,16 @@ public class PrizeFactory : MonoBehaviour
         inventoryManager = gameManager.inventoryManager;
         stageManager = gameManager.stageManager;
 
-        SpawnPrize(10);
+        SpawnPrize(spawnRate);
+    }
+
+    public void CheckSpawnPrize()
+    {
+        int count = activePrizeList.Count;
+        if(count <= minAmountToSpawn)
+        {
+            SpawnPrize(spawnRate);
+        }
     }
 
     public void SpawnPrize(int amount)
