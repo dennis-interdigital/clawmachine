@@ -535,8 +535,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootFailed: {fileID: 66303712970969709}
   rootSuccess: {fileID: 1847267162624604425}
-  textPrizeName: {fileID: 6184666664508626385}
-  textPrizeRarity: {fileID: 8902083017895629995}
+  textPrizeName: {fileID: 8902083017895629995}
+  textPrizeRarity: {fileID: 8748017062750415048}
   buttonClose: {fileID: 3837070996072610361}
   textButtonClose: {fileID: 3093625966616914049}
 --- !u!1 &5122660897969895557
