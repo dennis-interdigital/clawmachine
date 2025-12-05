@@ -17,8 +17,6 @@ public class GameplayObjects : MonoBehaviour
     {
         stageManager = inStageManager;
 
-        targetY = 0;
-
         targetY = NormalizeAngle(transform.localEulerAngles.y);
         targetY = Mathf.Clamp(targetY, minY, maxY);
         SetRotation(targetY);
@@ -44,6 +42,12 @@ public class GameplayObjects : MonoBehaviour
         if (targetY >= maxY) return;
 
         targetY += rotateStep;
+        targetY = Mathf.Clamp(targetY, minY, maxY);
+    }
+
+    public void ResetRotation()
+    {
+        targetY = 0f;
         targetY = Mathf.Clamp(targetY, minY, maxY);
     }
 

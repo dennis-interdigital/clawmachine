@@ -87,5 +87,6 @@ public class ResultPopup : BaseUI
         uiManager.HidePopup(PopupState.Result);
         uiManager.ShowUI(UIState.MainMenu);
         stageManager.prizeFactory.CheckSpawnPrize();
+        stageManager.gameplayObjects.ResetRotation();
     }
 }
