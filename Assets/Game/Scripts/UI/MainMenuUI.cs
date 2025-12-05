@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class MainMenuUI : BaseUI
 {
     [SerializeField] Button buttonInsertCoin;
+    [SerializeField] Button buttonRecord;
 
     StageManager stageManager;
 
@@ -13,6 +14,7 @@ public class MainMenuUI : BaseUI
         stageManager = gameManager.stageManager;
 
         buttonInsertCoin.onClick.AddListener(OnClickInsertCoin);
+        buttonRecord.onClick.AddListener(OnClickRecord);
     }
 
     public override void Show(params object[] payload)
@@ -31,5 +33,10 @@ public class MainMenuUI : BaseUI
     {
         uiManager.ShowUI(UIState.GameMenu);
         stageManager.ResetStage();
+    }
+
+    void OnClickRecord()
+    {
+        uiManager.ShowPopup(PopupState.Record);
     }
 }

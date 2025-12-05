@@ -54,7 +54,7 @@ public class Prize : MonoBehaviour
         if (isPrizeDrop)
         {
             string id = prizeData.id;
-            factory.stageManager.SaveRecord(prizeData, index, true);
+            factory.stageManager.SaveRecord(prizeData, id, index, true);
             factory.inventoryManager.AddToInventory(id, 1);
             DelayDestroy();
         }

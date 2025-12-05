@@ -17,7 +17,8 @@ public enum PopupState
 {
     None,
     General,
-    Result
+    Result,
+    Record
 }
 
 [Serializable]
